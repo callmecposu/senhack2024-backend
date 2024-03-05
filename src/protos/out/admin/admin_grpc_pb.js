@@ -1,7 +1,7 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 'use strict';
-var grpc = require('grpc');
+var grpc = require('@grpc/grpc-js');
 var admin_admin_pb = require('../admin/admin_pb.js');
 
 function serialize_admin_CreateAccessCodeRequest(arg) {
