@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as auth_auth_pb from "../auth/auth_pb";
 
 interface IAuthServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
