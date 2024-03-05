@@ -3,6 +3,7 @@ import { AuthServiceService } from "./protos/out/auth/auth_grpc_pb";
 import mongoose from "mongoose";
 import { AdminServiceService } from "./protos/out/admin/admin_grpc_pb";
 import createCondo from './implementations/admin/createCondo'
+import createAccesCode from './implementations/admin/createAccessCode'
 require('dotenv').config()
 
 mongoose
@@ -10,7 +11,7 @@ mongoose
     .then(() => {
         console.log("Connected to the DB!");
         const server = new grpc.Server();
-        server.addService(AdminServiceService, {createCondo});
+        server.addService(AdminServiceService, {createCondo, createAccesCode});
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
