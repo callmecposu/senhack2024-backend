@@ -4,7 +4,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 import * as admin_admin_pb from "../admin/admin_pb";
 
 interface IAdminServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
