@@ -20,6 +20,6 @@ interface ICondoAccessCode extends Document {
 }
 
 // Create and export the condoCode model
-const CondoCode =  model<ICondoAccessCode>('CondoAccessCode', condoAccessCodeSchema);
+const CondoAccessCode =  model<ICondoAccessCode>('CondoAccessCode', condoAccessCodeSchema);
 
-export default CondoCode;
+export default CondoAccessCode;

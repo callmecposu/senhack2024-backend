@@ -19,7 +19,7 @@ const createCondo = async (
     const savedCondo = await condo.save()
     const response = new pb.CreateCondoResponse();
     const respCondo = new pb.Condo()
-    respCondo.setId(savedCondo._id)
+    respCondo.setId(savedCondo._id.toString())
     respCondo.setAddress(savedCondo.address)
     respCondo.setName(savedCondo.name)
     const respOfficeHours: pb.OfficeHour[] = []

@@ -24,7 +24,6 @@ const userSchema: Schema = new Schema({
     },
     unit: {
         type: Number,
-        required: true
     },
     email: {
         type: String,
