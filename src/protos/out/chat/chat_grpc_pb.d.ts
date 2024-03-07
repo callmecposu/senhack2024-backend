@@ -6,7 +6,6 @@
 
 import * as grpc from "@grpc/grpc-js";
 import * as chat_chat_pb from "../chat/chat_pb";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 interface IChatServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     subscribeToChat: IChatServiceService_ISubscribeToChat;

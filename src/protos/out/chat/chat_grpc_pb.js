@@ -3,7 +3,6 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var chat_chat_pb = require('../chat/chat_pb.js');
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
 function serialize_chat_Message(arg) {
   if (!(arg instanceof chat_chat_pb.Message)) {

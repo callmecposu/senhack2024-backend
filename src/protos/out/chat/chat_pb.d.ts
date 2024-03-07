@@ -5,7 +5,6 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 export class Message extends jspb.Message { 
     getCondoId(): string;
@@ -18,11 +17,8 @@ export class Message extends jspb.Message {
     setUserLastName(value: string): Message;
     getContent(): string;
     setContent(value: string): Message;
-
-    hasDate(): boolean;
-    clearDate(): void;
-    getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setDate(value?: google_protobuf_timestamp_pb.Timestamp): Message;
+    getDate(): string;
+    setDate(value: string): Message;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Message.AsObject;
@@ -41,7 +37,7 @@ export namespace Message {
         userFirstName: string,
         userLastName: string,
         content: string,
-        date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        date: string,
     }
 }
 

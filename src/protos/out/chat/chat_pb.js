@@ -21,8 +21,6 @@ var global = (function() {
   return Function('return this')();
 }.call(null));
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
-goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.chat.Message', null, global);
 goog.exportSymbol('proto.chat.SendMessageResponse', null, global);
 goog.exportSymbol('proto.chat.SubscribeToChatRequest', null, global);
@@ -170,7 +168,7 @@ proto.chat.Message.toObject = function(includeInstance, msg) {
     userFirstName: jspb.Message.getFieldWithDefault(msg, 3, ""),
     userLastName: jspb.Message.getFieldWithDefault(msg, 4, ""),
     content: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    date: (f = msg.getDate()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    date: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -228,8 +226,7 @@ proto.chat.Message.deserializeBinaryFromReader = function(msg, reader) {
       msg.setContent(value);
       break;
     case 6:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      var value = /** @type {string} */ (reader.readString());
       msg.setDate(value);
       break;
     default:
@@ -297,11 +294,10 @@ proto.chat.Message.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getDate();
-  if (f != null) {
-    writer.writeMessage(
+  if (f.length > 0) {
+    writer.writeString(
       6,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+      f
     );
   }
 };
@@ -398,39 +394,20 @@ proto.chat.Message.prototype.setContent = function(value) {
 
 
 /**
- * optional google.protobuf.Timestamp date = 6;
- * @return {?proto.google.protobuf.Timestamp}
+ * optional string date = 6;
+ * @return {string}
  */
 proto.chat.Message.prototype.getDate = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 6));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @param {string} value
  * @return {!proto.chat.Message} returns this
-*/
+ */
 proto.chat.Message.prototype.setDate = function(value) {
-  return jspb.Message.setWrapperField(this, 6, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.chat.Message} returns this
- */
-proto.chat.Message.prototype.clearDate = function() {
-  return this.setDate(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.chat.Message.prototype.hasDate = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
