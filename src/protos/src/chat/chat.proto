@@ -1,0 +1,36 @@
+syntax = "proto3";
+package chat;
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+    rpc SubscribeToChat(SubscribeToChatRequest) returns (stream Message);
+    rpc SendMessage(Message) returns (SendMessageResponse);
+    rpc UnsubscribeFromChat(UnsubscribeFromChatRequest) returns (UnsubscribeFromChatResponse);
+}
+
+message Message {
+    string condo_id = 1;
+    string user_id = 2;
+    string user_first_name = 3;
+    string user_last_name = 4;
+    string content = 5;
+    google.protobuf.Timestamp date = 6;
+}
+
+message SubscribeToChatRequest {
+    string user_id = 1;
+    string condo_id = 2;
+}
+
+message SendMessageResponse {
+    
+}
+
+message UnsubscribeFromChatRequest {
+    string user_id = 1;
+    string condo_id = 2;
+}
+
+message UnsubscribeFromChatResponse {
+    
+}
