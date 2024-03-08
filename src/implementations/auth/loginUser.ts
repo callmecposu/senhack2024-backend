@@ -35,6 +35,7 @@ const loginUser = async (
         // if passwords match, return the user object
         const response = new pb.LoginUserResponse()
         const respUser = new pb.User()
+        respUser.setId(userWithGivenEmail._id.toString())
         respUser.setCondoId(userWithGivenEmail.condo_id)
         respUser.setFirstName(userWithGivenEmail.first_name)
         respUser.setLastName(userWithGivenEmail.last_name)
