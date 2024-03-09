@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "chat/chat.proto";
+
+service EventsService {
+    rpc SubscribeToEvents(SubscribeToEventsRequest) returns (stream Event);
+    rpc UnsubscribeFromEvents(UnsubscribeFromEventsRequest) returns (Empty);
+}
+
+message SubscribeToEventsRequest {
+    string user_id = 1;
+}
+
+message Event {
+    oneof event {
+        NewMessageEvent new_message_event = 1;
+        NewChatEvent new_chat_event = 2;
+        DeleteChatEvent delete_chat_event = 3;
+    }
+}
+
+message NewMessageEvent {
+    Message message = 1;
+}
+
+message NewChatEvent {
+    Chat chat = 1;
+}
+
+message DeleteChatEvent {
+    string chat_id = 1;
+}
+
+message UnsubscribeFromEventsRequest {
+    string user_id = 1;
+}
