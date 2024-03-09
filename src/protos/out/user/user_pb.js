@@ -627,7 +627,7 @@ proto.user.User.prototype.clearNotInterestedList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.user.UserInfo.repeatedFields_ = [1,3];
+proto.user.UserInfo.repeatedFields_ = [1,2,3];
 
 
 
@@ -661,7 +661,7 @@ proto.user.UserInfo.prototype.toObject = function(opt_includeInstance) {
 proto.user.UserInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     interestsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    nativeLang: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    nativeLangsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
     otherLangsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     personalityType: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
@@ -707,8 +707,10 @@ proto.user.UserInfo.deserializeBinaryFromReader = function(msg, reader) {
       }
       break;
     case 2:
-      var value = /** @type {!proto.user.Language} */ (reader.readEnum());
-      msg.setNativeLang(value);
+      var values = /** @type {!Array<!proto.user.Language>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addNativeLangs(values[i]);
+      }
       break;
     case 3:
       var values = /** @type {!Array<!proto.user.Language>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
@@ -756,9 +758,9 @@ proto.user.UserInfo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getNativeLang();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  f = message.getNativeLangsList();
+  if (f.length > 0) {
+    writer.writePackedEnum(
       2,
       f
     );
@@ -818,20 +820,39 @@ proto.user.UserInfo.prototype.clearInterestsList = function() {
 
 
 /**
- * optional Language native_lang = 2;
- * @return {!proto.user.Language}
+ * repeated Language native_langs = 2;
+ * @return {!Array<!proto.user.Language>}
  */
-proto.user.UserInfo.prototype.getNativeLang = function() {
-  return /** @type {!proto.user.Language} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.user.UserInfo.prototype.getNativeLangsList = function() {
+  return /** @type {!Array<!proto.user.Language>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.user.Language>} value
+ * @return {!proto.user.UserInfo} returns this
+ */
+proto.user.UserInfo.prototype.setNativeLangsList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
 };
 
 
 /**
  * @param {!proto.user.Language} value
+ * @param {number=} opt_index
  * @return {!proto.user.UserInfo} returns this
  */
-proto.user.UserInfo.prototype.setNativeLang = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+proto.user.UserInfo.prototype.addNativeLangs = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.user.UserInfo} returns this
+ */
+proto.user.UserInfo.prototype.clearNativeLangsList = function() {
+  return this.setNativeLangsList([]);
 };
 
 

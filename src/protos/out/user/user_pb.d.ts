@@ -68,8 +68,10 @@ export class UserInfo extends jspb.Message {
     getInterestsList(): Array<Interest>;
     setInterestsList(value: Array<Interest>): UserInfo;
     addInterests(value: Interest, index?: number): Interest;
-    getNativeLang(): Language;
-    setNativeLang(value: Language): UserInfo;
+    clearNativeLangsList(): void;
+    getNativeLangsList(): Array<Language>;
+    setNativeLangsList(value: Array<Language>): UserInfo;
+    addNativeLangs(value: Language, index?: number): Language;
     clearOtherLangsList(): void;
     getOtherLangsList(): Array<Language>;
     setOtherLangsList(value: Array<Language>): UserInfo;
@@ -90,7 +92,7 @@ export class UserInfo extends jspb.Message {
 export namespace UserInfo {
     export type AsObject = {
         interestsList: Array<Interest>,
-        nativeLang: Language,
+        nativeLangsList: Array<Language>,
         otherLangsList: Array<Language>,
         personalityType: PersonalityType,
     }
