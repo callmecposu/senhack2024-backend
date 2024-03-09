@@ -8,15 +8,16 @@ service UserService {
 }
 
 message User{
-    string email = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string anon_name = 4;
-    string bio = 5;
-    UserInfo about_user = 6;
-    UserInfo preferences = 7;
-    repeated string block_list = 8;
-    repeated string not_interested = 9;
+    string id = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string anon_name = 5;
+    string bio = 6;
+    UserInfo about_user = 7;
+    UserInfo preferences = 8;
+    repeated string block_list = 9;
+    repeated string not_interested = 10;
 }
 
 message UserInfo {
@@ -90,7 +91,8 @@ message LoginUserRequest {
 }
 
 message UpdateUserRequest {
-    optional string bio = 1;
-    optional UserInfo about_user = 2;
-    optional UserInfo preferences = 3;
+    string id = 1;
+    optional string bio = 2;
+    optional UserInfo about_user = 3;
+    optional UserInfo preferences = 4;
 }

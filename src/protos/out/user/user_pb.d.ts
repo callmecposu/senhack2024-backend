@@ -7,6 +7,8 @@
 import * as jspb from "google-protobuf";
 
 export class User extends jspb.Message { 
+    getId(): string;
+    setId(value: string): User;
     getEmail(): string;
     setEmail(value: string): User;
     getFirstName(): string;
@@ -48,6 +50,7 @@ export class User extends jspb.Message {
 
 export namespace User {
     export type AsObject = {
+        id: string,
         email: string,
         firstName: string,
         lastName: string,
@@ -146,6 +149,8 @@ export namespace LoginUserRequest {
 }
 
 export class UpdateUserRequest extends jspb.Message { 
+    getId(): string;
+    setId(value: string): UpdateUserRequest;
 
     hasBio(): boolean;
     clearBio(): void;
@@ -174,6 +179,7 @@ export class UpdateUserRequest extends jspb.Message {
 
 export namespace UpdateUserRequest {
     export type AsObject = {
+        id: string,
         bio?: string,
         aboutUser?: UserInfo.AsObject,
         preferences?: UserInfo.AsObject,

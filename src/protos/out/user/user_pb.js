@@ -140,7 +140,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.user.User.repeatedFields_ = [8,9];
+proto.user.User.repeatedFields_ = [9,10];
 
 
 
@@ -173,15 +173,16 @@ proto.user.User.prototype.toObject = function(opt_includeInstance) {
  */
 proto.user.User.toObject = function(includeInstance, msg) {
   var f, obj = {
-    email: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    firstName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    lastName: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    anonName: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    bio: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    firstName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    lastName: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    anonName: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    bio: jspb.Message.getFieldWithDefault(msg, 6, ""),
     aboutUser: (f = msg.getAboutUser()) && proto.user.UserInfo.toObject(includeInstance, f),
     preferences: (f = msg.getPreferences()) && proto.user.UserInfo.toObject(includeInstance, f),
-    blockListList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    notInterestedList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
+    blockListList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+    notInterestedList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -220,39 +221,43 @@ proto.user.User.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEmail(value);
+      msg.setId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFirstName(value);
+      msg.setEmail(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setLastName(value);
+      msg.setFirstName(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAnonName(value);
+      msg.setLastName(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBio(value);
+      msg.setAnonName(value);
       break;
     case 6:
-      var value = new proto.user.UserInfo;
-      reader.readMessage(value,proto.user.UserInfo.deserializeBinaryFromReader);
-      msg.setAboutUser(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBio(value);
       break;
     case 7:
       var value = new proto.user.UserInfo;
       reader.readMessage(value,proto.user.UserInfo.deserializeBinaryFromReader);
-      msg.setPreferences(value);
+      msg.setAboutUser(value);
       break;
     case 8:
+      var value = new proto.user.UserInfo;
+      reader.readMessage(value,proto.user.UserInfo.deserializeBinaryFromReader);
+      msg.setPreferences(value);
+      break;
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.addBlockList(value);
       break;
-    case 9:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.addNotInterested(value);
       break;
@@ -285,50 +290,49 @@ proto.user.User.prototype.serializeBinary = function() {
  */
 proto.user.User.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getEmail();
+  f = message.getId();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getFirstName();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getLastName();
+  f = message.getFirstName();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getAnonName();
+  f = message.getLastName();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getBio();
+  f = message.getAnonName();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = message.getAboutUser();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getBio();
+  if (f.length > 0) {
+    writer.writeString(
       6,
-      f,
-      proto.user.UserInfo.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getPreferences();
+  f = message.getAboutUser();
   if (f != null) {
     writer.writeMessage(
       7,
@@ -336,17 +340,25 @@ proto.user.User.serializeBinaryToWriter = function(message, writer) {
       proto.user.UserInfo.serializeBinaryToWriter
     );
   }
+  f = message.getPreferences();
+  if (f != null) {
+    writer.writeMessage(
+      8,
+      f,
+      proto.user.UserInfo.serializeBinaryToWriter
+    );
+  }
   f = message.getBlockListList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      8,
+      9,
       f
     );
   }
   f = message.getNotInterestedList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      9,
+      10,
       f
     );
   }
@@ -354,10 +366,10 @@ proto.user.User.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string email = 1;
+ * optional string id = 1;
  * @return {string}
  */
-proto.user.User.prototype.getEmail = function() {
+proto.user.User.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -366,16 +378,16 @@ proto.user.User.prototype.getEmail = function() {
  * @param {string} value
  * @return {!proto.user.User} returns this
  */
-proto.user.User.prototype.setEmail = function(value) {
+proto.user.User.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string first_name = 2;
+ * optional string email = 2;
  * @return {string}
  */
-proto.user.User.prototype.getFirstName = function() {
+proto.user.User.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -384,16 +396,16 @@ proto.user.User.prototype.getFirstName = function() {
  * @param {string} value
  * @return {!proto.user.User} returns this
  */
-proto.user.User.prototype.setFirstName = function(value) {
+proto.user.User.prototype.setEmail = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string last_name = 3;
+ * optional string first_name = 3;
  * @return {string}
  */
-proto.user.User.prototype.getLastName = function() {
+proto.user.User.prototype.getFirstName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -402,16 +414,16 @@ proto.user.User.prototype.getLastName = function() {
  * @param {string} value
  * @return {!proto.user.User} returns this
  */
-proto.user.User.prototype.setLastName = function(value) {
+proto.user.User.prototype.setFirstName = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string anon_name = 4;
+ * optional string last_name = 4;
  * @return {string}
  */
-proto.user.User.prototype.getAnonName = function() {
+proto.user.User.prototype.getLastName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -420,16 +432,16 @@ proto.user.User.prototype.getAnonName = function() {
  * @param {string} value
  * @return {!proto.user.User} returns this
  */
-proto.user.User.prototype.setAnonName = function(value) {
+proto.user.User.prototype.setLastName = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string bio = 5;
+ * optional string anon_name = 5;
  * @return {string}
  */
-proto.user.User.prototype.getBio = function() {
+proto.user.User.prototype.getAnonName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -438,18 +450,36 @@ proto.user.User.prototype.getBio = function() {
  * @param {string} value
  * @return {!proto.user.User} returns this
  */
-proto.user.User.prototype.setBio = function(value) {
+proto.user.User.prototype.setAnonName = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional UserInfo about_user = 6;
+ * optional string bio = 6;
+ * @return {string}
+ */
+proto.user.User.prototype.getBio = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.user.User} returns this
+ */
+proto.user.User.prototype.setBio = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional UserInfo about_user = 7;
  * @return {?proto.user.UserInfo}
  */
 proto.user.User.prototype.getAboutUser = function() {
   return /** @type{?proto.user.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.user.UserInfo, 6));
+    jspb.Message.getWrapperField(this, proto.user.UserInfo, 7));
 };
 
 
@@ -458,7 +488,7 @@ proto.user.User.prototype.getAboutUser = function() {
  * @return {!proto.user.User} returns this
 */
 proto.user.User.prototype.setAboutUser = function(value) {
-  return jspb.Message.setWrapperField(this, 6, value);
+  return jspb.Message.setWrapperField(this, 7, value);
 };
 
 
@@ -476,17 +506,17 @@ proto.user.User.prototype.clearAboutUser = function() {
  * @return {boolean}
  */
 proto.user.User.prototype.hasAboutUser = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * optional UserInfo preferences = 7;
+ * optional UserInfo preferences = 8;
  * @return {?proto.user.UserInfo}
  */
 proto.user.User.prototype.getPreferences = function() {
   return /** @type{?proto.user.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.user.UserInfo, 7));
+    jspb.Message.getWrapperField(this, proto.user.UserInfo, 8));
 };
 
 
@@ -495,7 +525,7 @@ proto.user.User.prototype.getPreferences = function() {
  * @return {!proto.user.User} returns this
 */
 proto.user.User.prototype.setPreferences = function(value) {
-  return jspb.Message.setWrapperField(this, 7, value);
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
@@ -513,16 +543,16 @@ proto.user.User.prototype.clearPreferences = function() {
  * @return {boolean}
  */
 proto.user.User.prototype.hasPreferences = function() {
-  return jspb.Message.getField(this, 7) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * repeated string block_list = 8;
+ * repeated string block_list = 9;
  * @return {!Array<string>}
  */
 proto.user.User.prototype.getBlockListList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
 };
 
 
@@ -531,7 +561,7 @@ proto.user.User.prototype.getBlockListList = function() {
  * @return {!proto.user.User} returns this
  */
 proto.user.User.prototype.setBlockListList = function(value) {
-  return jspb.Message.setField(this, 8, value || []);
+  return jspb.Message.setField(this, 9, value || []);
 };
 
 
@@ -541,7 +571,7 @@ proto.user.User.prototype.setBlockListList = function(value) {
  * @return {!proto.user.User} returns this
  */
 proto.user.User.prototype.addBlockList = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
 };
 
 
@@ -555,11 +585,11 @@ proto.user.User.prototype.clearBlockListList = function() {
 
 
 /**
- * repeated string not_interested = 9;
+ * repeated string not_interested = 10;
  * @return {!Array<string>}
  */
 proto.user.User.prototype.getNotInterestedList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 10));
 };
 
 
@@ -568,7 +598,7 @@ proto.user.User.prototype.getNotInterestedList = function() {
  * @return {!proto.user.User} returns this
  */
 proto.user.User.prototype.setNotInterestedList = function(value) {
-  return jspb.Message.setField(this, 9, value || []);
+  return jspb.Message.setField(this, 10, value || []);
 };
 
 
@@ -578,7 +608,7 @@ proto.user.User.prototype.setNotInterestedList = function(value) {
  * @return {!proto.user.User} returns this
  */
 proto.user.User.prototype.addNotInterested = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 10, value, opt_index);
 };
 
 
@@ -1272,7 +1302,8 @@ proto.user.UpdateUserRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.user.UpdateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    bio: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    bio: jspb.Message.getFieldWithDefault(msg, 2, ""),
     aboutUser: (f = msg.getAboutUser()) && proto.user.UserInfo.toObject(includeInstance, f),
     preferences: (f = msg.getPreferences()) && proto.user.UserInfo.toObject(includeInstance, f)
   };
@@ -1313,14 +1344,18 @@ proto.user.UpdateUserRequest.deserializeBinaryFromReader = function(msg, reader)
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBio(value);
+      msg.setId(value);
       break;
     case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBio(value);
+      break;
+    case 3:
       var value = new proto.user.UserInfo;
       reader.readMessage(value,proto.user.UserInfo.deserializeBinaryFromReader);
       msg.setAboutUser(value);
       break;
-    case 3:
+    case 4:
       var value = new proto.user.UserInfo;
       reader.readMessage(value,proto.user.UserInfo.deserializeBinaryFromReader);
       msg.setPreferences(value);
@@ -1354,17 +1389,24 @@ proto.user.UpdateUserRequest.prototype.serializeBinary = function() {
  */
 proto.user.UpdateUserRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {string} */ (jspb.Message.getField(message, 1));
-  if (f != null) {
+  f = message.getId();
+  if (f.length > 0) {
     writer.writeString(
       1,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeString(
+      2,
       f
     );
   }
   f = message.getAboutUser();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
       proto.user.UserInfo.serializeBinaryToWriter
     );
@@ -1372,7 +1414,7 @@ proto.user.UpdateUserRequest.serializeBinaryToWriter = function(message, writer)
   f = message.getPreferences();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       proto.user.UserInfo.serializeBinaryToWriter
     );
@@ -1381,10 +1423,10 @@ proto.user.UpdateUserRequest.serializeBinaryToWriter = function(message, writer)
 
 
 /**
- * optional string bio = 1;
+ * optional string id = 1;
  * @return {string}
  */
-proto.user.UpdateUserRequest.prototype.getBio = function() {
+proto.user.UpdateUserRequest.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1393,8 +1435,26 @@ proto.user.UpdateUserRequest.prototype.getBio = function() {
  * @param {string} value
  * @return {!proto.user.UpdateUserRequest} returns this
  */
+proto.user.UpdateUserRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string bio = 2;
+ * @return {string}
+ */
+proto.user.UpdateUserRequest.prototype.getBio = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.user.UpdateUserRequest} returns this
+ */
 proto.user.UpdateUserRequest.prototype.setBio = function(value) {
-  return jspb.Message.setField(this, 1, value);
+  return jspb.Message.setField(this, 2, value);
 };
 
 
@@ -1403,7 +1463,7 @@ proto.user.UpdateUserRequest.prototype.setBio = function(value) {
  * @return {!proto.user.UpdateUserRequest} returns this
  */
 proto.user.UpdateUserRequest.prototype.clearBio = function() {
-  return jspb.Message.setField(this, 1, undefined);
+  return jspb.Message.setField(this, 2, undefined);
 };
 
 
@@ -1412,17 +1472,17 @@ proto.user.UpdateUserRequest.prototype.clearBio = function() {
  * @return {boolean}
  */
 proto.user.UpdateUserRequest.prototype.hasBio = function() {
-  return jspb.Message.getField(this, 1) != null;
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
- * optional UserInfo about_user = 2;
+ * optional UserInfo about_user = 3;
  * @return {?proto.user.UserInfo}
  */
 proto.user.UpdateUserRequest.prototype.getAboutUser = function() {
   return /** @type{?proto.user.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.user.UserInfo, 2));
+    jspb.Message.getWrapperField(this, proto.user.UserInfo, 3));
 };
 
 
@@ -1431,7 +1491,7 @@ proto.user.UpdateUserRequest.prototype.getAboutUser = function() {
  * @return {!proto.user.UpdateUserRequest} returns this
 */
 proto.user.UpdateUserRequest.prototype.setAboutUser = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -1449,17 +1509,17 @@ proto.user.UpdateUserRequest.prototype.clearAboutUser = function() {
  * @return {boolean}
  */
 proto.user.UpdateUserRequest.prototype.hasAboutUser = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional UserInfo preferences = 3;
+ * optional UserInfo preferences = 4;
  * @return {?proto.user.UserInfo}
  */
 proto.user.UpdateUserRequest.prototype.getPreferences = function() {
   return /** @type{?proto.user.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.user.UserInfo, 3));
+    jspb.Message.getWrapperField(this, proto.user.UserInfo, 4));
 };
 
 
@@ -1468,7 +1528,7 @@ proto.user.UpdateUserRequest.prototype.getPreferences = function() {
  * @return {!proto.user.UpdateUserRequest} returns this
 */
 proto.user.UpdateUserRequest.prototype.setPreferences = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -1486,7 +1546,7 @@ proto.user.UpdateUserRequest.prototype.clearPreferences = function() {
  * @return {boolean}
  */
 proto.user.UpdateUserRequest.prototype.hasPreferences = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 

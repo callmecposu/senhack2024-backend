@@ -1,7 +1,7 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 'use strict';
-var grpc = require('grpc');
+var grpc = require('@grpc/grpc-js');
 var user_user_pb = require('../user/user_pb.js');
 
 function serialize_user_CreateUserRequest(arg) {
