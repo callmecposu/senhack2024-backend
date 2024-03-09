@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 // import sendMessage from "./implementations/chat/sendMessage";
 // import unsubscribeFromChat from "./implementations/chat/unsubscribeFromChat";
 // import { ChatServiceService } from "./protos/out/chat/chat_grpc_pb";
+import updateUser from "./implementations/user/updateUser";
+import { UserServiceService } from "./protos/out/user/user_grpc_pb";
 require("dotenv").config();
 
 mongoose
@@ -27,6 +29,9 @@ mongoose
         //     sendMessage,
         //     unsubscribeFromChat,
         // });
+        server.addService(UserServiceService, {
+            updateUser,
+        });
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
