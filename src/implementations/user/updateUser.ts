@@ -20,13 +20,13 @@ const updateUser = async (
                 bio: request.getBio(),
                 aboutUser: {
                     interests: request.getAboutUser()?.getInterestsList(),
-                    nativeLanguages: request.getAboutUser()?.getNativeLang(),
+                    nativeLanguages: request.getAboutUser()?.getNativeLangsList(),
                     otherLanguages: request.getAboutUser()?.getOtherLangsList(),
                     personalityType: request.getAboutUser()?.getPersonalityType()
                 },
                 roomatePreferences: {
                     interests: request.getPreferences()?.getInterestsList(),
-                    nativeLanguages: request.getPreferences()?.getNativeLang(),
+                    nativeLanguages: request.getPreferences()?.getNativeLangsList(),
                     otherLanguages: request.getPreferences()?.getOtherLangsList(),
                     personalityType: request.getPreferences()?.getPersonalityType()
                 },
