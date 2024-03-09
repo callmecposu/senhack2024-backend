@@ -43,4 +43,6 @@ const userSchema: Schema = new Schema({
     notInterested: { type: [String], default: [] },
 });
 
-export default mongoose.model<User>('User', userSchema);
+const UserModel = mongoose.model<User>('User', userSchema);
+
+export default UserModel;
