@@ -35,7 +35,7 @@ const loginUser = async (
         }
         // return the user object
         const respUser = new pb.User();
-        respUser.setId(userWithGivenEmail._id);
+        respUser.setId(userWithGivenEmail._id.toString());
         respUser.setEmail(userWithGivenEmail.email);
         respUser.setFirstName(userWithGivenEmail.fName);
         respUser.setLastName(userWithGivenEmail.lName);
