@@ -671,7 +671,7 @@ proto.User.prototype.clearNotInterestedList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.user.UserInfo.repeatedFields_ = [1,2,3];
+proto.UserInfo.repeatedFields_ = [1,2,3];
 
 
 
@@ -751,7 +751,7 @@ proto.UserInfo.deserializeBinaryFromReader = function(msg, reader) {
       }
       break;
     case 2:
-      var values = /** @type {!Array<!proto.user.Language>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      var values = /** @type {!Array<!proto.Language>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
       for (var i = 0; i < values.length; i++) {
         msg.addNativeLangs(values[i]);
       }
@@ -865,28 +865,38 @@ proto.UserInfo.prototype.clearInterestsList = function() {
 
 /**
  * repeated Language native_langs = 2;
- * @return {!Array<!proto.user.Language>}
+ * @return {!Array<!proto.Language>}
  */
-proto.user.UserInfo.prototype.getNativeLangsList = function() {
-  return /** @type {!Array<!proto.user.Language>} */ (jspb.Message.getRepeatedField(this, 2));
+proto.UserInfo.prototype.getNativeLangsList = function() {
+  return /** @type {!Array<!proto.Language>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
 /**
- * @param {!Array<!proto.user.Language>} value
- * @return {!proto.user.UserInfo} returns this
+ * @param {!Array<!proto.Language>} value
+ * @return {!proto.UserInfo} returns this
  */
-proto.user.UserInfo.prototype.setNativeLangsList = function(value) {
+proto.UserInfo.prototype.setNativeLangsList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
 
 /**
- * @param {!proto.user.Language} value
- * @return {!proto.user.UserInfo} returns this
+ * @param {!proto.Language} value
+ * @param {number=} opt_index
+ * @return {!proto.UserInfo} returns this
  */
-proto.user.UserInfo.prototype.setNativeLang = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+proto.UserInfo.prototype.addNativeLangs = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.UserInfo} returns this
+ */
+proto.UserInfo.prototype.clearNativeLangsList = function() {
+  return this.setNativeLangsList([]);
 };
 
 

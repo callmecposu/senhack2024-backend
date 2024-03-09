@@ -3,4 +3,4 @@ npx grpc_tools_node_protoc \
 --ts_out=./protos/out \
 --grpc_out=./protos/out \
 --proto_path=./protos/src \
-./protos/src/user/user.proto
+./protos/src/events/events.proto
