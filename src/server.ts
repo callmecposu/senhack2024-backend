@@ -31,6 +31,7 @@ mongoose
         //     sendMessage,
         //     unsubscribeFromChat,
         // });
+        server.addService(UserServiceService, {createUser, loginUser, updateUser})
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
