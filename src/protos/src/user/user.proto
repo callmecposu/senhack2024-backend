@@ -23,7 +23,7 @@ message User{
 
 message UserInfo {
     repeated Interest interests = 1;
-    Language native_lang = 2;
+    repeated Language native_langs = 2;
     repeated Language other_langs = 3;
     PersonalityType personality_type = 4;
 }
