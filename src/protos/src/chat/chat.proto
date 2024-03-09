@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+service ChatService{
+    rpc CreateChat(CreateChatRequest) returns (Chat);
+    rpc DeleteChat(DeleteChatRequest) returns (Empty);
+    rpc SendMessage(SendMessageRequest) returns (Message);
+}
+
+message Chat {
+    string id = 1;
+    string date_created = 2;
+    repeated string users = 3;
+    repeated string reveal_identity = 4;
+}
+
+message Message {
+    string id = 1;
+    string date = 2;
+    string sender_id = 3;
+    string content = 4;
+    string chat_id = 5;
+}
+
+message CreateChatRequest {
+    repeated string users = 1;
+}
+
+message DeleteChatRequest {
+    string chat_id = 1;
+}
+
+message Empty {}
+
+message SendMessageRequest {
+    string sender_id = 1;
+    string chat_id = 2;
+    string content = 3;
+}
