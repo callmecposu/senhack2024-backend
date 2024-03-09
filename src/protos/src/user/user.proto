@@ -1,0 +1,96 @@
+syntax = "proto3";
+package user;
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (User);
+    rpc LoginUser(LoginUserRequest) returns (User);
+    rpc UpdateUser(UpdateUserRequest) returns (User);
+}
+
+message User{
+    string email = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string anon_name = 4;
+    string bio = 5;
+    UserInfo about_user = 6;
+    UserInfo preferences = 7;
+    repeated string block_list = 8;
+    repeated string not_interested = 9;
+}
+
+message UserInfo {
+    repeated Interest interests = 1;
+    Language native_lang = 2;
+    repeated Language other_langs = 3;
+    PersonalityType personality_type = 4;
+}
+
+enum Interest {
+    MUSIC = 0;
+    MOVIES = 1;
+    TV_SHOWS = 2;
+    BOOKS = 3;
+    HOBBIES = 4;
+    SPORTS = 5;
+    TRAVEL = 6;
+    FOOD_AND_DINING = 7;
+    FITNESS_AND_WELLNESS = 8;
+    GAMING = 9;
+    TECHNOLOGY = 10;
+    FASHION_AND_STYLE = 11;
+    ARTS_AND_CULTURE = 12;
+    PHOTOGRAPHY = 13;
+    NATURE_AND_OUTDOORS = 14;
+    POLITICS_AND_CURRENT_EVENTS = 15;
+    SCIENCE_AND_SPACE = 16;
+    PETS = 17;
+    VOLUNTEER_WORK = 18;
+    CREATIVE_WRITING = 19;
+}
+
+enum Language {
+    ENGLISH = 0;
+    CHINESE = 1;
+    SPANISH = 2;
+    HINDI = 3;
+    ARABIC = 4;
+    FRENCH = 5;
+    BENGALI = 6;
+    RUSSIAN = 7;
+    PORTUGUESE = 8;
+    URDU = 9;
+    GERMAN = 10;
+    JAPANESE = 11;
+    SWAHILI = 12;
+    PUNJABI = 13;
+    KOREAN = 14;
+    TELUGU = 15;
+    MARATHI = 16;
+    TAMIL = 17;
+    ITALIAN = 18;
+    TURKISH = 19;
+}
+
+enum PersonalityType {
+    INTROVERT = 0;
+    EXTRAVERT = 1;
+}
+
+message CreateUserRequest {
+    string email = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string password = 4;
+}
+
+message LoginUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message UpdateUserRequest {
+    optional string bio = 1;
+    optional UserInfo about_user = 2;
+    optional UserInfo preferences = 3;
+}

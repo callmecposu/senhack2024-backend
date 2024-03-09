@@ -1,15 +1,15 @@
 import * as grpc from "@grpc/grpc-js";
-import { AuthServiceService } from "./protos/out/auth/auth_grpc_pb";
 import mongoose from "mongoose";
-import { AdminServiceService } from "./protos/out/admin/admin_grpc_pb";
-import createCondo from "./implementations/admin/createCondo";
-import createAccessCode from "./implementations/admin/createAccessCode";
-import createUser from "./implementations/auth/createUser";
-import loginUser from "./implementations/auth/loginUser";
-import subscribeToChat from "./implementations/chat/subscribeToChat";
-import sendMessage from "./implementations/chat/sendMessage";
-import unsubscribeFromChat from "./implementations/chat/unsubscribeFromChat";
-import { ChatServiceService } from "./protos/out/chat/chat_grpc_pb";
+// import { AuthServiceService } from "./protos/out/auth/auth_grpc_pb";
+// import { AdminServiceService } from "./protos/out/admin/admin_grpc_pb";
+// import createCondo from "./implementations/admin/createCondo";
+// import createAccessCode from "./implementations/admin/createAccessCode";
+// import createUser from "./implementations/auth/createUser";
+// import loginUser from "./implementations/auth/loginUser";
+// import subscribeToChat from "./implementations/chat/subscribeToChat";
+// import sendMessage from "./implementations/chat/sendMessage";
+// import unsubscribeFromChat from "./implementations/chat/unsubscribeFromChat";
+// import { ChatServiceService } from "./protos/out/chat/chat_grpc_pb";
 require("dotenv").config();
 
 mongoose
@@ -17,16 +17,16 @@ mongoose
     .then(() => {
         console.log("Connected to the DB!");
         const server = new grpc.Server();
-        server.addService(AdminServiceService, {
-            createCondo,
-            createAccessCode,
-        });
-        server.addService(AuthServiceService, { createUser, loginUser });
-        server.addService(ChatServiceService, {
-            subscribeToChat,
-            sendMessage,
-            unsubscribeFromChat,
-        });
+        // server.addService(AdminServiceService, {
+        //     createCondo,
+        //     createAccessCode,
+        // });
+        // server.addService(AuthServiceService, { createUser, loginUser });
+        // server.addService(ChatServiceService, {
+        //     subscribeToChat,
+        //     sendMessage,
+        //     unsubscribeFromChat,
+        // });
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
