@@ -14,6 +14,7 @@ import { UserServiceService } from "./protos/out/user/user_grpc_pb";
 import updateUser from "./implementations/user/updateUser";
 import createUser from './implementations/user/createUser'
 import loginUser from './implementations/user/loginUser'
+import findChatMate from './implementations/user/findChatMate'
 require("dotenv").config();
 
 mongoose
@@ -31,7 +32,7 @@ mongoose
         //     sendMessage,
         //     unsubscribeFromChat,
         // });
-        server.addService(UserServiceService, {createUser, loginUser, updateUser})
+        server.addService(UserServiceService, {createUser, loginUser, updateUser, findChatMate})
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
