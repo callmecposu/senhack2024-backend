@@ -2,6 +2,7 @@ import { sendUnaryData, status, ServerUnaryCall } from "@grpc/grpc-js";
 import { FindChatMateRequest } from "../../protos/out/user/user_pb";
 import { User, UserInfo } from "../../protos/out/user/user_pb";
 import UserModel from "../../models/user";
+import similarity from "compute-cosine-similarity";
 
 const findChatMate = async (
     call: ServerUnaryCall<FindChatMateRequest, User>,
@@ -57,6 +58,12 @@ const findChatMate = async (
             // Count the number of common roomate preferences personality types
             if(currentUser.roomatePreferences.personalityType === userWithScore._doc.aboutUser.personalityType){
                 userWithScore.score += 1.6;
+            }
+
+            // Calculate the similarity between the two users' bios
+            if(currentUser.embeddings.length == userWithScore._doc.embeddings.length){
+                const similarityScore = similarity(currentUser.embeddings, userWithScore._doc.embeddings) || 0;
+                userWithScore.score += similarityScore*2;
             }
 
             userWithScore.score *= 10;

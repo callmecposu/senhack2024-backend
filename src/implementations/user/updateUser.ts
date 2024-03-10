@@ -2,6 +2,10 @@ import { ServerUnaryCall, sendUnaryData, status } from "@grpc/grpc-js";
 import { UpdateUserRequest, User } from "../../protos/out/user/user_pb";
 import { UserInfo } from "../../protos/out/user/user_pb";
 import UserModel from "../../models/user";
+import OpenAI from "openai";
+require("dotenv").config();
+
+const openai = new OpenAI({apiKey: process.env.OPENAPI_KEY});
 
 // Update User
 const updateUser = async (
@@ -15,6 +19,13 @@ const updateUser = async (
         const user = await UserModel.findById(id);
     
         if(user){    
+            // Generate embeddings
+            const bioEmbedding = request.getBio() !== user.bio ?(await openai.embeddings.create({
+                model: "text-embedding-3-small",
+                input: request.getBio() || '',
+                encoding_format: "float",
+            })).data[0].embedding : user.embeddings;
+
             // Update the user
             const response = await user?.updateOne({
                 bio: request.getBio(),
@@ -30,6 +41,7 @@ const updateUser = async (
                     otherLanguages: request.getPreferences()?.getOtherLangsList(),
                     personalityType: request.getPreferences()?.getPersonalityType()
                 },
+                embeddings: bioEmbedding
             })
 
             const responseUser = new User();
