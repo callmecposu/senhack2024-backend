@@ -1,10 +1,24 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+interface ShortUserInfo {
+    userID: string,
+    displayName : string
+}
+
 interface Chat extends Document {
     dateCreated: Date;
-    users: string[];
+    users: ShortUserInfo[]
     revealIdentity: string[];
 }
+
+const shortUserInfoSchema: Schema = new Schema({
+    userID: {
+        type: String
+    },
+    displayName: {
+        type: String
+    }
+}, {_id: false})
 
 const chatSchema: Schema = new Schema({
     dateCreated: {
@@ -13,10 +27,10 @@ const chatSchema: Schema = new Schema({
         default: Date.now
     },
     users: {
-        type: [String],
+        type: [shortUserInfoSchema],
         required: true,
         validate: {
-            validator: function (users: string[]) {
+            validator: function (users: ShortUserInfo[]) {
                 return users.length <= 2;
             },
             message: 'The maximum length of the users array is 2.'
