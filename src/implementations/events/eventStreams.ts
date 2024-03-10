@@ -12,8 +12,10 @@ export const getEventStreams = () => eventStreams;
 
 export const addEventStream = (es: EventStream) => {
     eventStreams.push(es);
+    console.log('EventStreams num: ', eventStreams.length)
 };
 
 export const removeEventStream = (userID: string) => {
     eventStreams = eventStreams.filter((es) => es.userID != userID);
+    console.log('EventStreams num: ', eventStreams.length)
 };

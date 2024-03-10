@@ -3,4 +3,4 @@ npx grpc_tools_node_protoc \
 --ts_out=./protos/out \
 --grpc_out=./protos/out \
 --proto_path=./protos/src \
-./protos/src/events/events.proto
+./protos/src/chat/chat.proto

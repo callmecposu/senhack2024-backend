@@ -46,6 +46,8 @@ export class Message extends jspb.Message {
     setDate(value: string): Message;
     getSenderId(): string;
     setSenderId(value: string): Message;
+    getReceiverId(): string;
+    setReceiverId(value: string): Message;
     getContent(): string;
     setContent(value: string): Message;
     getChatId(): string;
@@ -66,6 +68,7 @@ export namespace Message {
         id: string,
         date: string,
         senderId: string,
+        receiverId: string,
         content: string,
         chatId: string,
     }
@@ -133,6 +136,8 @@ export namespace Empty {
 export class SendMessageRequest extends jspb.Message { 
     getSenderId(): string;
     setSenderId(value: string): SendMessageRequest;
+    getReceiverId(): string;
+    setReceiverId(value: string): SendMessageRequest;
     getChatId(): string;
     setChatId(value: string): SendMessageRequest;
     getContent(): string;
@@ -151,6 +156,7 @@ export class SendMessageRequest extends jspb.Message {
 export namespace SendMessageRequest {
     export type AsObject = {
         senderId: string,
+        receiverId: string,
         chatId: string,
         content: string,
     }

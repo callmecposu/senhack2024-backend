@@ -17,8 +17,9 @@ message Message {
     string id = 1;
     string date = 2;
     string sender_id = 3;
-    string content = 4;
-    string chat_id = 5;
+    string receiver_id = 4;
+    string content = 5;
+    string chat_id = 6;
 }
 
 message CreateChatRequest {
@@ -33,6 +34,7 @@ message Empty {}
 
 message SendMessageRequest {
     string sender_id = 1;
-    string chat_id = 2;
-    string content = 3;
+    string receiver_id = 2;
+    string chat_id = 3;
+    string content = 4;
 }

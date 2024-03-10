@@ -1,20 +1,25 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 interface Message extends Document {
     dateTime: Date;
-    userSent: mongoose.Types.ObjectId;
+    sender: string;
+    receiver: string;
     content: string;
-    chat: mongoose.Types.ObjectId;
+    chat: string;
 }
 
 const messageSchema: Schema = new Schema({
     dateTime: {
         type: Date,
         required: true,
-        default: Date.now
+        default: Date.now,
     },
-    userSent: {
-        type: mongoose.Types.ObjectId,
+    sender: {
+        type: String,
+        required: true,
+    },
+    receiver: {
+        type: String,
         required: true,
     },
     content: {
@@ -22,11 +27,11 @@ const messageSchema: Schema = new Schema({
         required: true,
     },
     chat: {
-        type: mongoose.Types.ObjectId,
+        type: String,
         required: true,
     },
 });
 
-const MessageModel = mongoose.model<Message>('Message', messageSchema);
+const MessageModel = mongoose.model<Message>("Message", messageSchema);
 
 export default MessageModel;
