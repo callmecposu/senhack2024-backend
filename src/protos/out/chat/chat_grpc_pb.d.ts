@@ -11,6 +11,7 @@ interface IChatServiceService extends grpc.ServiceDefinition<grpc.UntypedService
     createChat: IChatServiceService_ICreateChat;
     deleteChat: IChatServiceService_IDeleteChat;
     sendMessage: IChatServiceService_ISendMessage;
+    revealIdentity: IChatServiceService_IRevealIdentity;
 }
 
 interface IChatServiceService_ICreateChat extends grpc.MethodDefinition<chat_chat_pb.CreateChatRequest, chat_chat_pb.Chat> {
@@ -40,6 +41,15 @@ interface IChatServiceService_ISendMessage extends grpc.MethodDefinition<chat_ch
     responseSerialize: grpc.serialize<chat_chat_pb.Message>;
     responseDeserialize: grpc.deserialize<chat_chat_pb.Message>;
 }
+interface IChatServiceService_IRevealIdentity extends grpc.MethodDefinition<chat_chat_pb.RevealIdentityRequest, chat_chat_pb.Empty> {
+    path: "/ChatService/RevealIdentity";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<chat_chat_pb.RevealIdentityRequest>;
+    requestDeserialize: grpc.deserialize<chat_chat_pb.RevealIdentityRequest>;
+    responseSerialize: grpc.serialize<chat_chat_pb.Empty>;
+    responseDeserialize: grpc.deserialize<chat_chat_pb.Empty>;
+}
 
 export const ChatServiceService: IChatServiceService;
 
@@ -47,6 +57,7 @@ export interface IChatServiceServer {
     createChat: grpc.handleUnaryCall<chat_chat_pb.CreateChatRequest, chat_chat_pb.Chat>;
     deleteChat: grpc.handleUnaryCall<chat_chat_pb.DeleteChatRequest, chat_chat_pb.Empty>;
     sendMessage: grpc.handleUnaryCall<chat_chat_pb.SendMessageRequest, chat_chat_pb.Message>;
+    revealIdentity: grpc.handleUnaryCall<chat_chat_pb.RevealIdentityRequest, chat_chat_pb.Empty>;
 }
 
 export interface IChatServiceClient {
@@ -59,6 +70,9 @@ export interface IChatServiceClient {
     sendMessage(request: chat_chat_pb.SendMessageRequest, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
     sendMessage(request: chat_chat_pb.SendMessageRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
     sendMessage(request: chat_chat_pb.SendMessageRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
+    revealIdentity(request: chat_chat_pb.RevealIdentityRequest, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
+    revealIdentity(request: chat_chat_pb.RevealIdentityRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
+    revealIdentity(request: chat_chat_pb.RevealIdentityRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
 }
 
 export class ChatServiceClient extends grpc.Client implements IChatServiceClient {
@@ -72,4 +86,7 @@ export class ChatServiceClient extends grpc.Client implements IChatServiceClient
     public sendMessage(request: chat_chat_pb.SendMessageRequest, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
     public sendMessage(request: chat_chat_pb.SendMessageRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
     public sendMessage(request: chat_chat_pb.SendMessageRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Message) => void): grpc.ClientUnaryCall;
+    public revealIdentity(request: chat_chat_pb.RevealIdentityRequest, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
+    public revealIdentity(request: chat_chat_pb.RevealIdentityRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
+    public revealIdentity(request: chat_chat_pb.RevealIdentityRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_chat_pb.Empty) => void): grpc.ClientUnaryCall;
 }
