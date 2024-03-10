@@ -18,6 +18,7 @@ interface User extends Document {
     roomatePreferences: UserInfo;
     blockList: string[];
     notInterested: string[];
+    embeddings: number[];
 }
 
 const userSchema: Schema = new Schema({
@@ -41,6 +42,7 @@ const userSchema: Schema = new Schema({
     },
     blockList: { type: [String], default: [] },
     notInterested: { type: [String], default: [] },
+    embeddings: { type: [Number], default: [] },
 });
 
 const UserModel = mongoose.model<User>('User', userSchema);

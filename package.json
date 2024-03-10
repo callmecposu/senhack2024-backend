@@ -21,10 +21,12 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.10.1",
     "bcrypt": "^5.1.1",
+    "compute-cosine-similarity": "^1.1.0",
     "dotenv": "^16.4.5",
-    "grpc_tools_node_protoc_ts": "^5.3.3",
     "grpc-tools": "^1.12.4",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
     "mongoose": "^8.2.1",
+    "openai": "^4.28.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
