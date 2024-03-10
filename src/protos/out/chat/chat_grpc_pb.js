@@ -59,6 +59,17 @@ function deserialize_Message(buffer_arg) {
   return chat_chat_pb.Message.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_RevealIdentityRequest(arg) {
+  if (!(arg instanceof chat_chat_pb.RevealIdentityRequest)) {
+    throw new Error('Expected argument of type RevealIdentityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_RevealIdentityRequest(buffer_arg) {
+  return chat_chat_pb.RevealIdentityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_SendMessageRequest(arg) {
   if (!(arg instanceof chat_chat_pb.SendMessageRequest)) {
     throw new Error('Expected argument of type SendMessageRequest');
@@ -104,6 +115,17 @@ var ChatServiceService = exports.ChatServiceService = {
     requestDeserialize: deserialize_SendMessageRequest,
     responseSerialize: serialize_Message,
     responseDeserialize: deserialize_Message,
+  },
+  revealIdentity: {
+    path: '/ChatService/RevealIdentity',
+    requestStream: false,
+    responseStream: false,
+    requestType: chat_chat_pb.RevealIdentityRequest,
+    responseType: chat_chat_pb.Empty,
+    requestSerialize: serialize_RevealIdentityRequest,
+    requestDeserialize: deserialize_RevealIdentityRequest,
+    responseSerialize: serialize_Empty,
+    responseDeserialize: deserialize_Empty,
   },
 };
 

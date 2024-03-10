@@ -20,6 +20,7 @@ import unsubscribeFromEvents from './implementations/events/unsubscribeFromEvent
 import { ChatServiceService } from "./protos/out/chat/chat_grpc_pb";
 import createChat from './implementations/chat/createChat'
 import sendMessage from './implementations/chat/sendMessage'
+import revealIdentity from './implementations/chat/revealIdentity'
 require("dotenv").config();
 
 mongoose
@@ -39,7 +40,7 @@ mongoose
         // });
         server.addService(UserServiceService, {createUser, loginUser, updateUser})
         server.addService(EventsServiceService, {subscribeToEvents, unsubscribeFromEvents})
-        server.addService(ChatServiceService, {createChat, sendMessage})
+        server.addService(ChatServiceService, {createChat, sendMessage, revealIdentity})
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),

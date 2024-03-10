@@ -44,6 +44,11 @@ export class Event extends jspb.Message {
     getDeleteChatEvent(): DeleteChatEvent | undefined;
     setDeleteChatEvent(value?: DeleteChatEvent): Event;
 
+    hasUpdateChatEvent(): boolean;
+    clearUpdateChatEvent(): void;
+    getUpdateChatEvent(): UpdateChatEvent | undefined;
+    setUpdateChatEvent(value?: UpdateChatEvent): Event;
+
     getEventCase(): Event.EventCase;
 
     serializeBinary(): Uint8Array;
@@ -61,6 +66,7 @@ export namespace Event {
         newMessageEvent?: NewMessageEvent.AsObject,
         newChatEvent?: NewChatEvent.AsObject,
         deleteChatEvent?: DeleteChatEvent.AsObject,
+        updateChatEvent?: UpdateChatEvent.AsObject,
     }
 
     export enum EventCase {
@@ -68,6 +74,7 @@ export namespace Event {
         NEW_MESSAGE_EVENT = 1,
         NEW_CHAT_EVENT = 2,
         DELETE_CHAT_EVENT = 3,
+        UPDATE_CHAT_EVENT = 4,
     }
 
 }
@@ -135,6 +142,29 @@ export class DeleteChatEvent extends jspb.Message {
 export namespace DeleteChatEvent {
     export type AsObject = {
         chatId: string,
+    }
+}
+
+export class UpdateChatEvent extends jspb.Message { 
+
+    hasChat(): boolean;
+    clearChat(): void;
+    getChat(): chat_chat_pb.Chat | undefined;
+    setChat(value?: chat_chat_pb.Chat): UpdateChatEvent;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UpdateChatEvent.AsObject;
+    static toObject(includeInstance: boolean, msg: UpdateChatEvent): UpdateChatEvent.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UpdateChatEvent, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UpdateChatEvent;
+    static deserializeBinaryFromReader(message: UpdateChatEvent, reader: jspb.BinaryReader): UpdateChatEvent;
+}
+
+export namespace UpdateChatEvent {
+    export type AsObject = {
+        chat?: chat_chat_pb.Chat.AsObject,
     }
 }
 

@@ -16,6 +16,7 @@ message Event {
         NewMessageEvent new_message_event = 1;
         NewChatEvent new_chat_event = 2;
         DeleteChatEvent delete_chat_event = 3;
+        UpdateChatEvent update_chat_event = 4;
     }
 }
 
@@ -29,6 +30,10 @@ message NewChatEvent {
 
 message DeleteChatEvent {
     string chat_id = 1;
+}
+
+message UpdateChatEvent {
+    Chat chat = 1;
 }
 
 message UnsubscribeFromEventsRequest {

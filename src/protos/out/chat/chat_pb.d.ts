@@ -184,3 +184,26 @@ export namespace SendMessageRequest {
         content: string,
     }
 }
+
+export class RevealIdentityRequest extends jspb.Message { 
+    getUserId(): string;
+    setUserId(value: string): RevealIdentityRequest;
+    getChatId(): string;
+    setChatId(value: string): RevealIdentityRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RevealIdentityRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: RevealIdentityRequest): RevealIdentityRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RevealIdentityRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RevealIdentityRequest;
+    static deserializeBinaryFromReader(message: RevealIdentityRequest, reader: jspb.BinaryReader): RevealIdentityRequest;
+}
+
+export namespace RevealIdentityRequest {
+    export type AsObject = {
+        userId: string,
+        chatId: string,
+    }
+}

@@ -13,7 +13,11 @@ const subscribeToEvents = async (
         // store the stream
         addEventStream({ userID: req.getUserId(), stream: call });
         // fetch all the user's chats
-        const userChats = await ChatModel.find({ users: req.getUserId() });
+        const userChats = await ChatModel.find({ users: {
+            $elemMatch: {
+                userID: req.getUserId()
+            }
+        } });
         // send new chat events to the user
         for (let i = 0; i < userChats.length; i++) {
             const chatEv = new ev_pb.Event();

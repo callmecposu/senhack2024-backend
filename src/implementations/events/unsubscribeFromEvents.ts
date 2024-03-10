@@ -8,6 +8,7 @@ const unsubscribeFromEvents = (call: ServerUnaryCall<ev_pb.UnsubscribeFromEvents
     try {
         // remove the event stream from the storage
         removeEventStream(req.getUserId())
+        callback(null, new ch_pb.Empty())
     } catch (err: any){
         console.log(err)
         callback({code: status.INTERNAL, message: err.message})

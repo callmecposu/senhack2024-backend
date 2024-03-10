@@ -4,6 +4,7 @@ service ChatService{
     rpc CreateChat(CreateChatRequest) returns (Chat);
     rpc DeleteChat(DeleteChatRequest) returns (Empty);
     rpc SendMessage(SendMessageRequest) returns (Message);
+    rpc RevealIdentity(RevealIdentityRequest) returns (Empty);
 }
 
 message Chat {
@@ -42,4 +43,9 @@ message SendMessageRequest {
     string receiver_id = 2;
     string chat_id = 3;
     string content = 4;
+}
+
+message RevealIdentityRequest {
+    string user_id = 1;
+    string chat_id = 2;
 }
