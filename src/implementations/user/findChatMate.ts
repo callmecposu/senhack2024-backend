@@ -1,6 +1,7 @@
 import { sendUnaryData, status, ServerUnaryCall } from "@grpc/grpc-js";
 import { FindChatMateRequest } from "../../protos/out/user/user_pb";
 import { User, UserInfo } from "../../protos/out/user/user_pb";
+import ChatModel from "../../models/chat";
 import UserModel from "../../models/user";
 import similarity from "compute-cosine-similarity";
 
@@ -13,6 +14,11 @@ const findChatMate = async (
         // Find the user in the database by id
         const id = request.getUserId();
         const currentUser = await UserModel.findById(id);
+        
+        let chats = await ChatModel.find();
+        let chatIds = chats
+        .filter(chat => chat.users[0].userID === id || chat.users[1].userID === id)
+        .map(chat => chat.users.map(user => user.userID));
 
         if(!currentUser){
             callback({code: status.NOT_FOUND, message: "User not found"});
@@ -25,6 +31,10 @@ const findChatMate = async (
         for(let i = 0; i < allUsers.length; i++){
             let userWithScore: any = Object.assign({}, allUsers[i]);
             userWithScore.score = 0;
+
+            if(chatIds.some(chatId => chatId.includes(userWithScore._doc._id.toString()))){
+                continue;
+            }
 
             // Count the number of common interests
             const commonInterests = currentUser.aboutUser.interests.filter(interest => userWithScore._doc.aboutUser.interests.includes(interest));
