@@ -13,3 +13,5 @@ const unsubscribeFromEvents = (call: ServerUnaryCall<ev_pb.UnsubscribeFromEvents
         callback({code: status.INTERNAL, message: err.message})
     }
 }
+
+export default unsubscribeFromEvents

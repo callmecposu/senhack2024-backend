@@ -14,6 +14,9 @@ import { UserServiceService } from "./protos/out/user/user_grpc_pb";
 import updateUser from "./implementations/user/updateUser";
 import createUser from './implementations/user/createUser'
 import loginUser from './implementations/user/loginUser'
+import { EventsServiceService } from "./protos/out/events/events_grpc_pb";
+import subscribeToEvents from './implementations/events/subscribeToEvents'
+import unsubscribeFromEvents from './implementations/events/unsubscribeFromEvents'
 require("dotenv").config();
 
 mongoose
@@ -32,6 +35,7 @@ mongoose
         //     unsubscribeFromChat,
         // });
         server.addService(UserServiceService, {createUser, loginUser, updateUser})
+        server.addService(EventsServiceService, {subscribeToEvents, unsubscribeFromEvents})
         server.bindAsync(
             "0.0.0.0:50017",
             grpc.ServerCredentials.createInsecure(),
