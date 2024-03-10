@@ -9,8 +9,13 @@ service ChatService{
 message Chat {
     string id = 1;
     string date_created = 2;
-    repeated string users = 3;
+    repeated ShortUserInfo users = 3;
     repeated string reveal_identity = 4;
+}
+
+message ShortUserInfo {
+    string user_id = 1;
+    string display_name = 2;
 }
 
 message Message {

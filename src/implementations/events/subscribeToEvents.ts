@@ -20,8 +20,11 @@ const subscribeToEvents = async (
             const newChatEv = new ev_pb.NewChatEvent();
             const newChat = new ch_pb.Chat();
             newChat.setId(userChats[i]._id.toString());
-            userChats[i].users.forEach((userID) => {
-                newChat.addUsers(userID);
+            userChats[i].users.forEach((user) => {
+                const shUserInfo = new ch_pb.ShortUserInfo()
+                shUserInfo.setUserId(user.userID)
+                shUserInfo.setDisplayName(user.displayName)
+                newChat.addUsers(shUserInfo)
             });
             userChats[i].revealIdentity.forEach((ri) => {
                 newChat.addRevealIdentity(ri);

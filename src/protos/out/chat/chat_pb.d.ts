@@ -12,9 +12,9 @@ export class Chat extends jspb.Message {
     getDateCreated(): string;
     setDateCreated(value: string): Chat;
     clearUsersList(): void;
-    getUsersList(): Array<string>;
-    setUsersList(value: Array<string>): Chat;
-    addUsers(value: string, index?: number): string;
+    getUsersList(): Array<ShortUserInfo>;
+    setUsersList(value: Array<ShortUserInfo>): Chat;
+    addUsers(value?: ShortUserInfo, index?: number): ShortUserInfo;
     clearRevealIdentityList(): void;
     getRevealIdentityList(): Array<string>;
     setRevealIdentityList(value: Array<string>): Chat;
@@ -34,8 +34,31 @@ export namespace Chat {
     export type AsObject = {
         id: string,
         dateCreated: string,
-        usersList: Array<string>,
+        usersList: Array<ShortUserInfo.AsObject>,
         revealIdentityList: Array<string>,
+    }
+}
+
+export class ShortUserInfo extends jspb.Message { 
+    getUserId(): string;
+    setUserId(value: string): ShortUserInfo;
+    getDisplayName(): string;
+    setDisplayName(value: string): ShortUserInfo;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ShortUserInfo.AsObject;
+    static toObject(includeInstance: boolean, msg: ShortUserInfo): ShortUserInfo.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ShortUserInfo, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ShortUserInfo;
+    static deserializeBinaryFromReader(message: ShortUserInfo, reader: jspb.BinaryReader): ShortUserInfo;
+}
+
+export namespace ShortUserInfo {
+    export type AsObject = {
+        userId: string,
+        displayName: string,
     }
 }
 
