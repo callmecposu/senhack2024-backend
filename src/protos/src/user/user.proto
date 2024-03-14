@@ -23,7 +23,7 @@ message User{
     repeated string not_interested = 12;
 }
 
-message UserInfo {
+message UserInfo {  
     repeated Interest interests = 1;
     repeated Language native_langs = 2;
     repeated Language other_langs = 3;

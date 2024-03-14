@@ -5,6 +5,9 @@ interface UserInfo {
     nativeLanguages: string[];
     otherLanguages: string[];
     personalityType: string;
+    petInfo: string;
+    drinkingInfo: string;
+    smokingInfo: string;
 }
 
 interface User extends Document {
@@ -18,6 +21,8 @@ interface User extends Document {
     roomatePreferences: UserInfo;
     blockList: string[];
     notInterested: string[];
+    education: string;
+    socialMedia: string[];
     embeddings: number[];
 }
 
@@ -33,13 +38,21 @@ const userSchema: Schema = new Schema({
         nativeLanguages: { type: [String], default: [] },
         otherLanguages: { type: [String], default: [] },
         personalityType: { type: String, default: '' },
+        petInfo: {type: String, default: ''},
+        drinkingInfo: {type: String, default: ''},
+        smokinfInfo: {type: String, default: ''}
     },
     roomatePreferences: {
         interests: { type: [String], default: [] },
         nativeLanguages: { type: [String], default: [] },
         otherLanguages: { type: [String], default: [] },
         personalityType: { type: String, default: '' },
+        petInfo: {type: String, default: ''},
+        drinkingInfo: {type: String, default: ''},
+        smokinfInfo: {type: String, default: ''}
     },
+    socialMedia: {type: [String], default: []},
+    eduaction: {type: String, default: ''},
     blockList: { type: [String], default: [] },
     notInterested: { type: [String], default: [] },
     embeddings: { type: [Number], default: [] },
