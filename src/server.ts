@@ -22,6 +22,7 @@ import createChat from './implementations/chat/createChat'
 import sendMessage from './implementations/chat/sendMessage'
 import revealIdentity from './implementations/chat/revealIdentity'
 import findChatMate from './implementations/user/findChatMate'
+import getUser from "./implementations/user/getUser";
 import deleteChat from "./implementations/chat/deleteChat";
 require("dotenv").config();
 
@@ -40,7 +41,7 @@ mongoose
         //     sendMessage,
         //     unsubscribeFromChat,
         // });
-        server.addService(UserServiceService, {createUser, loginUser, updateUser, findChatMate})
+        server.addService(UserServiceService, {createUser, loginUser, updateUser, findChatMate, getUser})
         server.addService(EventsServiceService, {subscribeToEvents, unsubscribeFromEvents})
         server.addService(ChatServiceService, {createChat, sendMessage, revealIdentity, deleteChat})
         server.bindAsync(
