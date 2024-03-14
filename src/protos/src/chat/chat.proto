@@ -26,6 +26,7 @@ message Message {
     string receiver_id = 4;
     string content = 5;
     string chat_id = 6;
+    string violation_type = 7;
 }
 
 message CreateChatRequest {

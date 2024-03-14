@@ -75,6 +75,8 @@ export class Message extends jspb.Message {
     setContent(value: string): Message;
     getChatId(): string;
     setChatId(value: string): Message;
+    getViolationType(): string;
+    setViolationType(value: string): Message;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Message.AsObject;
@@ -94,6 +96,7 @@ export namespace Message {
         receiverId: string,
         content: string,
         chatId: string,
+        violationType: string,
     }
 }
 

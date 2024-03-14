@@ -50,8 +50,10 @@ const subscribeToEvents = async (
                 newMsg.setReceiverId(msg.receiver)
                 newMsg.setContent(msg.content)
                 newMsg.setDate(msg.dateTime.toString())
+                newMsg.setViolationType(msg.violation)
                 newMsgEv.setMessage(newMsg)
                 msgEv.setNewMessageEvent(newMsgEv)
+                
                 call.write(msgEv)
             })
         }

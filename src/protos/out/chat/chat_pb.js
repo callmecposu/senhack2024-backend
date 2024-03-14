@@ -663,7 +663,8 @@ proto.Message.toObject = function(includeInstance, msg) {
     senderId: jspb.Message.getFieldWithDefault(msg, 3, ""),
     receiverId: jspb.Message.getFieldWithDefault(msg, 4, ""),
     content: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    chatId: jspb.Message.getFieldWithDefault(msg, 6, "")
+    chatId: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    violationType: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -723,6 +724,10 @@ proto.Message.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setChatId(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setViolationType(value);
       break;
     default:
       reader.skipField();
@@ -792,6 +797,13 @@ proto.Message.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = message.getViolationType();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -903,6 +915,24 @@ proto.Message.prototype.getChatId = function() {
  */
 proto.Message.prototype.setChatId = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string violation_type = 7;
+ * @return {string}
+ */
+proto.Message.prototype.getViolationType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.Message} returns this
+ */
+proto.Message.prototype.setViolationType = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

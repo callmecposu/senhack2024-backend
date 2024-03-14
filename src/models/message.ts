@@ -6,6 +6,7 @@ interface Message extends Document {
     receiver: string;
     content: string;
     chat: string;
+    violation: string;
 }
 
 const messageSchema: Schema = new Schema({
@@ -29,6 +30,10 @@ const messageSchema: Schema = new Schema({
     chat: {
         type: String,
         required: true,
+    },
+    violation: {
+        type: String,
+        default: "",
     },
 });
 
