@@ -29,6 +29,12 @@ export class User extends jspb.Message {
     clearPreferences(): void;
     getPreferences(): UserInfo | undefined;
     setPreferences(value?: UserInfo): User;
+    getEducation(): string;
+    setEducation(value: string): User;
+    clearSocialMediaList(): void;
+    getSocialMediaList(): Array<string>;
+    setSocialMediaList(value: Array<string>): User;
+    addSocialMedia(value: string, index?: number): string;
     clearBlockListList(): void;
     getBlockListList(): Array<string>;
     setBlockListList(value: Array<string>): User;
@@ -58,6 +64,8 @@ export namespace User {
         bio: string,
         aboutUser?: UserInfo.AsObject,
         preferences?: UserInfo.AsObject,
+        education: string,
+        socialMediaList: Array<string>,
         blockListList: Array<string>,
         notInterestedList: Array<string>,
     }
@@ -76,8 +84,14 @@ export class UserInfo extends jspb.Message {
     getOtherLangsList(): Array<Language>;
     setOtherLangsList(value: Array<Language>): UserInfo;
     addOtherLangs(value: Language, index?: number): Language;
-    getPersonalityType(): PersonalityType;
-    setPersonalityType(value: PersonalityType): UserInfo;
+    getPersonalityType(): MbtiType;
+    setPersonalityType(value: MbtiType): UserInfo;
+    getPetInfo(): Pet;
+    setPetInfo(value: Pet): UserInfo;
+    getDrinkingInfo(): Frequency;
+    setDrinkingInfo(value: Frequency): UserInfo;
+    getSmokingInfo(): Frequency;
+    setSmokingInfo(value: Frequency): UserInfo;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): UserInfo.AsObject;
@@ -94,7 +108,10 @@ export namespace UserInfo {
         interestsList: Array<Interest>,
         nativeLangsList: Array<Language>,
         otherLangsList: Array<Language>,
-        personalityType: PersonalityType,
+        personalityType: MbtiType,
+        petInfo: Pet,
+        drinkingInfo: Frequency,
+        smokingInfo: Frequency,
     }
 }
 
@@ -229,52 +246,145 @@ export namespace FindChatMateRequest {
 }
 
 export enum Interest {
-    MUSIC = 0,
-    MOVIES = 1,
-    TV_SHOWS = 2,
-    BOOKS = 3,
-    HOBBIES = 4,
-    SPORTS = 5,
-    TRAVEL = 6,
-    FOOD_AND_DINING = 7,
-    FITNESS_AND_WELLNESS = 8,
-    GAMING = 9,
-    TECHNOLOGY = 10,
-    FASHION_AND_STYLE = 11,
-    ARTS_AND_CULTURE = 12,
-    PHOTOGRAPHY = 13,
-    NATURE_AND_OUTDOORS = 14,
-    POLITICS_AND_CURRENT_EVENTS = 15,
-    SCIENCE_AND_SPACE = 16,
-    PETS = 17,
-    VOLUNTEER_WORK = 18,
-    CREATIVE_WRITING = 19,
+    HIKING = 0,
+    TRAVELING = 1,
+    COOKING = 2,
+    PHOTOGRAPHY = 3,
+    READING = 4,
+    YOGA = 5,
+    RUNNING = 6,
+    PAINTING = 7,
+    GAMING = 8,
+    WATCHING_MOVIES = 9,
+    PLAYING_MUSICAL_INSTRUMENTS = 10,
+    WRITING = 11,
+    VOLUNTEERING = 12,
+    SURFING = 13,
+    SKIING_SNOWBOARDING = 14,
+    DANCING = 15,
+    WINE_TASTING = 16,
+    CRAFTING = 17,
+    BIRD_WATCHING = 18,
+    SCUBA_DIVING = 19,
+    ROCK_CLIMBING = 20,
+    MEDITATION = 21,
+    FOOD_TASTING = 22,
+    BIKING = 23,
+    FASHION = 24,
+    GARDENING = 25,
+    CAMPING = 26,
+    PLAYING_SPORTS = 27,
+    LEARNING_NEW_LANGUAGES = 28,
+    DIY_PROJECTS = 29,
+    ASTRONOMY = 30,
+    BOARD_GAMES = 31,
+    KARAOKE = 32,
+    HORSEBACK_RIDING = 33,
+    FASHION_DESIGN = 34,
+    MOTORSPORTS = 35,
+    COLLECTING = 36,
+    STAND_UP_COMEDY = 37,
+    ANIME_MANGA = 38,
+    POTTERY = 39,
+    ACTING = 40,
+    FISHING = 41,
+    SUSTAINABLE_LIVING = 42,
+    GEOCACHING = 43,
+    MUSIC_FESTIVALS = 44,
+    HISTORY = 45,
+    BEER_BREWING = 46,
+    SALSA_DANCING = 47,
+    DIGITAL_ART_CREATION = 48,
+    UNKNOWN = 49,
 }
 
 export enum Language {
-    ENGLISH = 0,
-    CHINESE = 1,
-    SPANISH = 2,
+    MANDARIN_CHINESE = 0,
+    SPANISH = 1,
+    ENGLISH = 2,
     HINDI = 3,
-    ARABIC = 4,
-    FRENCH = 5,
-    BENGALI = 6,
-    RUSSIAN = 7,
-    PORTUGUESE = 8,
-    URDU = 9,
-    GERMAN = 10,
-    JAPANESE = 11,
-    SWAHILI = 12,
-    PUNJABI = 13,
-    KOREAN = 14,
-    TELUGU = 15,
-    MARATHI = 16,
+    BENGALI = 4,
+    PORTUGUESE = 5,
+    RUSSIAN = 6,
+    JAPANESE = 7,
+    LAHNDA = 8,
+    MARATHI = 9,
+    TELUGU = 10,
+    WU_CHINESE = 11,
+    TURKISH = 12,
+    KOREAN = 13,
+    FRENCH = 14,
+    GERMAN = 15,
+    VIETNAMESE = 16,
     TAMIL = 17,
-    ITALIAN = 18,
-    TURKISH = 19,
+    URDU = 18,
+    YUE_CHINESE = 19,
+    JAVANESE = 20,
+    ITALIAN = 21,
+    EGYPTIAN_ARABIC = 22,
+    GUJARATI = 23,
+    JIN_CHINESE = 24,
+    POLISH = 25,
+    UKRAINIAN = 26,
+    MALAYALAM = 27,
+    KANNADA = 28,
+    XIANG_CHINESE = 29,
+    ORIYA = 30,
+    BURMESE = 31,
+    HAKKA_CHINESE = 32,
+    THAI = 33,
+    SUNDANESE = 34,
+    HAUSA = 35,
+    FARSI = 36,
+    DUTCH = 37,
+    YORUBA = 38,
+    SWAHILI = 39,
+    SERBO_CROATIAN = 40,
+    AMHARIC = 41,
+    NEPALI = 42,
+    HUNGARIAN = 43,
+    SIMPLIFIED_CHINESE = 44,
+    SOMALI = 45,
+    ASSAMESE = 46,
+    SINHALA = 47,
+    UZBEK = 48,
 }
 
-export enum PersonalityType {
-    INTROVERT = 0,
-    EXTRAVERT = 1,
+export enum MbtiType {
+    ISTJ = 0,
+    ISFJ = 1,
+    INFJ = 2,
+    INTJ = 3,
+    ISTP = 4,
+    ISFP = 5,
+    INFP = 6,
+    INTP = 7,
+    ESTP = 8,
+    ESFP = 9,
+    ENFP = 10,
+    ENTP = 11,
+    ESTJ = 12,
+    ESFJ = 13,
+    ENFJ = 14,
+    ENTJ = 15,
+}
+
+export enum Pet {
+    DOG = 0,
+    CAT = 1,
+    REPTILE = 2,
+    AMPHIBIAN = 3,
+    BIRD = 4,
+    HAMSTER = 5,
+    MULTIPLE_PETS = 6,
+    ALLERGIC = 7,
+    PET_FREE = 8,
+}
+
+export enum Frequency {
+    NEVER = 0,
+    RARELY = 1,
+    OCCASIONALLY = 2,
+    OFTEN = 3,
+    REGULARLY = 4,
 }
