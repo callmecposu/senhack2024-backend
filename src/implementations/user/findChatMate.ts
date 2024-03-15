@@ -17,8 +17,8 @@ const findChatMate = async (
         
         let chats = await ChatModel.find();
         let chatIds = chats
-        .filter(chat => chat.users[0].userID === id || chat.users[1].userID === id)
-        .map(chat => chat.users.map(user => user.userID));
+        .filter(chat => chat.users[0]?.userID === id || chat.users[1]?.userID === id)
+        .map(chat => chat.users.map(user => user?.userID));
 
         if(!currentUser){
             callback({code: status.NOT_FOUND, message: "User not found"});
@@ -104,11 +104,15 @@ const findChatMate = async (
         responseUser.setEmail(chatMate?.email);
         responseUser.setAnonName(chatMate?.anonName);
         responseUser.setBio(chatMate?.bio);
+        responseUser.setEducation(chatMate?.education);
 
         responseUserInfo.setInterestsList(chatMate?.aboutUser.interests.map(interest => Number(interest)));
         responseUserInfo.setNativeLangsList(chatMate?.aboutUser.nativeLanguages.map(interest => Number(interest)));
         responseUserInfo.setOtherLangsList(chatMate?.aboutUser.otherLanguages.map(interest => Number(interest)));
         responseUserInfo.setPersonalityType(Number(chatMate?.aboutUser.personalityType));
+        responseUserInfo.setDrinkingInfo(Number(chatMate?.aboutUser.drinkingInfo));
+        responseUserInfo.setSmokingInfo(Number(chatMate?.aboutUser.smokingInfo));
+        responseUserInfo.setPetInfo(Number(chatMate?.aboutUser.petInfo));
 
         responseUser.setAboutUser(responseUserInfo);
 
