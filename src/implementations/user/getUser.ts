@@ -25,6 +25,8 @@ const getUser = async (
         respUser.setLastName(user.lName);
         respUser.setAnonName(user.anonName);
         respUser.setBio(user.bio);
+        respUser.setEducation(user.education);
+        respUser.setSocialMediaList(user.socialMedia)
         const aboutUser = new pb.UserInfo();
         user.aboutUser.interests.forEach((interest) => {
             aboutUser.addInterests(Number(interest));
@@ -35,6 +37,9 @@ const getUser = async (
         user.aboutUser.otherLanguages.forEach((lang) => {
             aboutUser.addOtherLangs(Number(lang));
         });
+        aboutUser.setDrinkingInfo(Number(user.aboutUser.drinkingInfo))
+        aboutUser.setSmokingInfo(Number(user.aboutUser.smokingInfo))
+        aboutUser.setPetInfo(Number(user.aboutUser.petInfo))
         aboutUser.setPersonalityType(Number(user.aboutUser.personalityType));
         respUser.setAboutUser(aboutUser);
         const preferences = new pb.UserInfo();
@@ -47,12 +52,17 @@ const getUser = async (
         user.roomatePreferences.otherLanguages.forEach((lang) => {
             preferences.addOtherLangs(Number(lang));
         });
+        preferences.setDrinkingInfo(Number(user.roomatePreferences.drinkingInfo))
+        preferences.setSmokingInfo(Number(user.roomatePreferences.smokingInfo))
+        preferences.setPetInfo(Number(user.roomatePreferences.petInfo))
         preferences.setPersonalityType(
             Number(user.roomatePreferences.personalityType)
         );
         respUser.setPreferences(preferences);
         respUser.setBlockListList(user.blockList);
         respUser.setNotInterestedList(user.notInterested);
+        console.log(respUser)
+        console.log(respUser.toObject())
         // send the response
         callback(null, respUser);
     } catch (err: any) {

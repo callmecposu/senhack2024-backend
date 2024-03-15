@@ -41,6 +41,8 @@ const loginUser = async (
         respUser.setLastName(userWithGivenEmail.lName);
         respUser.setAnonName(userWithGivenEmail.anonName);
         respUser.setBio(userWithGivenEmail.bio);
+        respUser.setEducation(userWithGivenEmail.education);
+        respUser.setSocialMediaList(userWithGivenEmail.socialMedia)
         const aboutUser = new pb.UserInfo();
         userWithGivenEmail.aboutUser.interests.forEach((interest) => {
             aboutUser.addInterests(Number(interest));
@@ -51,6 +53,9 @@ const loginUser = async (
         userWithGivenEmail.aboutUser.otherLanguages.forEach((lang) => {
             aboutUser.addOtherLangs(Number(lang));
         });
+        aboutUser.setDrinkingInfo(Number(userWithGivenEmail.aboutUser.drinkingInfo))
+        aboutUser.setSmokingInfo(Number(userWithGivenEmail.aboutUser.smokingInfo))
+        aboutUser.setPetInfo(Number(userWithGivenEmail.aboutUser.petInfo))
         aboutUser.setPersonalityType(
             Number(userWithGivenEmail.aboutUser.personalityType)
         );
@@ -67,6 +72,9 @@ const loginUser = async (
         userWithGivenEmail.roomatePreferences.otherLanguages.forEach((lang) => {
             preferences.addOtherLangs(Number(lang));
         });
+        preferences.setDrinkingInfo(Number(userWithGivenEmail.roomatePreferences.drinkingInfo))
+        preferences.setSmokingInfo(Number(userWithGivenEmail.roomatePreferences.smokingInfo))
+        preferences.setPetInfo(Number(userWithGivenEmail.roomatePreferences.petInfo))
         preferences.setPersonalityType(
             Number(userWithGivenEmail.roomatePreferences.personalityType)
         );

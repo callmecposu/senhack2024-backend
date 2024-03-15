@@ -1,6 +1,5 @@
 import { ServerUnaryCall, sendUnaryData, status } from "@grpc/grpc-js";
 import { UpdateUserRequest, User } from "../../protos/out/user/user_pb";
-import { UserInfo } from "../../protos/out/user/user_pb";
 import UserModel from "../../models/user";
 import OpenAI from "openai";
 require("dotenv").config();
@@ -16,7 +15,7 @@ const updateUser = async (
     try {
         // Find the user in the database by id
         const id = request.getId();
-        const user = await UserModel.findById(id);
+        let user = await UserModel.findById(id);
     
         if(user){    
             // Generate embeddings
@@ -27,22 +26,38 @@ const updateUser = async (
             })).data[0].embedding : user.embeddings;
 
             // Update the user
-            const response = await user?.updateOne({
+            // user.bio = request.getBio()
+            // user.education = request.getEducation()
+            // user.socialMedia = request.getSocialMediaList();
+            // user.aboutUser = {
+            //     interests: request.getAboutUser()?.getInterestsList(),
+
+            // }
+            
+            const response = await UserModel.updateOne({_id: user._id}, {
                 bio: request.getBio(),
+                education: request.getEducation(),
+                socialMedia: request.getSocialMediaList(),
                 aboutUser: {
                     interests: request.getAboutUser()?.getInterestsList(),
                     nativeLanguages: request.getAboutUser()?.getNativeLangsList(),
                     otherLanguages: request.getAboutUser()?.getOtherLangsList(),
-                    personalityType: request.getAboutUser()?.getPersonalityType()
+                    personalityType: request.getAboutUser()?.getPersonalityType(),
+                    drinkingInfo: request.getAboutUser()?.getDrinkingInfo(),
+                    smokingInfo: request.getAboutUser()?.getSmokingInfo(),
+                    petInfo: request.getAboutUser()?.getPetInfo(),
                 },
                 roomatePreferences: {
                     interests: request.getPreferences()?.getInterestsList(),
                     nativeLanguages: request.getPreferences()?.getNativeLangsList(),
                     otherLanguages: request.getPreferences()?.getOtherLangsList(),
-                    personalityType: request.getPreferences()?.getPersonalityType()
+                    personalityType: request.getPreferences()?.getPersonalityType(),
+                    drinkingInfo: request.getAboutUser()?.getDrinkingInfo(),
+                    smokingInfo: request.getAboutUser()?.getSmokingInfo(),
+                    petInfo: request.getAboutUser()?.getPetInfo(),
                 },
                 embeddings: bioEmbedding
-            })
+            }, )
 
             const responseUser = new User();
             responseUser.setId(user?._id.toString());
@@ -50,7 +65,9 @@ const updateUser = async (
             responseUser.setFirstName(user?.fName);
             responseUser.setLastName(user?.lName);
             responseUser.setAnonName(user?.anonName);
-            responseUser.setBio(user?.bio);
+            responseUser.setBio(request.getBio() as string);
+            responseUser.setEducation(request.getEducation()),
+            responseUser.setSocialMediaList(request.getSocialMediaList())
             responseUser.setAboutUser(request.getAboutUser());
             responseUser.setPreferences(request.getPreferences());
             responseUser.setBlockListList(user?.blockList);
