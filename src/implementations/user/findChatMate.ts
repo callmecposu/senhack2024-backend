@@ -17,27 +17,33 @@ const verboseLog = (message: string) => {
 };
 
 const calculateMBTICompatibility = (mbti1: string, mbti2: string): number => {
-    return MBTICompatibility[mbti1][mbti2] * 40;
+    return (MBTICompatibility[mbti1][mbti2] || 0) * 40;
 }
 
 const calculateSmokingDrinkingCompatibility = (smoking1: number, drinking1: number, smoking2: number, drinking2: number): number => {
-    return compatibilityScore[smoking1][smoking2] + compatibilityScore[drinking1][drinking2];
+    return (compatibilityScore[smoking1][smoking2] || 0) + compatibilityScore[drinking1][drinking2];
 }
 
 const calculatePetCompitability = (pet1: number, pet2: number): number => {
-    return petCompitabilityScore[pet1][pet2];
+    return (petCompitabilityScore[pet1][pet2] || 0);
 }
 
 function calculateProbabilities(usersWithScores: any[]): any[] {
     let meanScore = usersWithScores.reduce((sum, user) => sum + user.score, 0) / usersWithScores.length;
-
+    
     let stdDev = Math.sqrt(usersWithScores.reduce((sum, user) => sum + Math.pow(user.score - meanScore, 2), 0) / usersWithScores.length);
 
-    usersWithScores.forEach(user => {
-        const zScore = (user.score - meanScore) / stdDev;
-        const probability = 1 / (stdDev * Math.sqrt(2 * Math.PI)) * Math.exp(-Math.pow(zScore, 2) / 2);
-        user.probability = probability;
-    });
+    if (stdDev === 0) {
+        usersWithScores.forEach(user => {
+            user.probability = 0;
+        });
+    } else {
+        usersWithScores.forEach(user => {
+            const zScore = (user.score - meanScore) / stdDev;
+            const probability = 1 / (stdDev * Math.sqrt(2 * Math.PI)) * Math.exp(-Math.pow(zScore, 2) / 2);
+            user.probability = probability;
+        });
+    }
 
     const sumProbabilities = usersWithScores.reduce((sum, user) => sum + user.probability, 0);
     usersWithScores.forEach(user => {
@@ -45,7 +51,7 @@ function calculateProbabilities(usersWithScores: any[]): any[] {
     });
 
     return usersWithScores;
-    }
+}
 
     const findChatMate = async (
         call: ServerUnaryCall<FindChatMateRequest, User>,
@@ -77,6 +83,8 @@ function calculateProbabilities(usersWithScores: any[]): any[] {
                 if(chatIds.some(chatId => chatId.includes(userWithScore._doc._id.toString()))){
                     continue;
                 }
+
+                verboseLog("User: " + userWithScore._doc.anonName);
 
                 // Personal matching
 
@@ -162,6 +170,8 @@ function calculateProbabilities(usersWithScores: any[]): any[] {
                 verboseLog("Total Score: " + userWithScore.score);
                 verboseLog("=====================================");
             }
+
+            verboseLog("Scores: " + usersWithScores.map(user => user.score));
 
             usersWithScores = calculateProbabilities(usersWithScores);
 
