@@ -22,6 +22,7 @@ import createChat from './implementations/chat/createChat'
 import sendMessage from './implementations/chat/sendMessage'
 import revealIdentity from './implementations/chat/revealIdentity'
 import findChatMate from './implementations/user/findChatMate'
+import getUser from "./implementations/user/getUser";
 import deleteChat from "./implementations/chat/deleteChat";
 import getUser from "./implementations/user/getUser";
 require("dotenv").config();

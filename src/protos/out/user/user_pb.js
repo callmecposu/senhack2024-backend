@@ -23,11 +23,13 @@ var global = (function() {
 
 goog.exportSymbol('proto.CreateUserRequest', null, global);
 goog.exportSymbol('proto.FindChatMateRequest', null, global);
+goog.exportSymbol('proto.Frequency', null, global);
 goog.exportSymbol('proto.GetUserRequest', null, global);
 goog.exportSymbol('proto.Interest', null, global);
 goog.exportSymbol('proto.Language', null, global);
 goog.exportSymbol('proto.LoginUserRequest', null, global);
-goog.exportSymbol('proto.PersonalityType', null, global);
+goog.exportSymbol('proto.MbtiType', null, global);
+goog.exportSymbol('proto.Pet', null, global);
 goog.exportSymbol('proto.UpdateUserRequest', null, global);
 goog.exportSymbol('proto.User', null, global);
 goog.exportSymbol('proto.UserInfo', null, global);
@@ -126,7 +128,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.UpdateUserRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.UpdateUserRequest.repeatedFields_, null);
 };
 goog.inherits(proto.UpdateUserRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -184,7 +186,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.User.repeatedFields_ = [9,10];
+proto.User.repeatedFields_ = [10,11,12];
 
 
 
@@ -225,8 +227,10 @@ proto.User.toObject = function(includeInstance, msg) {
     bio: jspb.Message.getFieldWithDefault(msg, 6, ""),
     aboutUser: (f = msg.getAboutUser()) && proto.UserInfo.toObject(includeInstance, f),
     preferences: (f = msg.getPreferences()) && proto.UserInfo.toObject(includeInstance, f),
-    blockListList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    notInterestedList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f
+    education: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    socialMediaList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+    blockListList: (f = jspb.Message.getRepeatedField(msg, 11)) == null ? undefined : f,
+    notInterestedList: (f = jspb.Message.getRepeatedField(msg, 12)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -299,9 +303,17 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.addBlockList(value);
+      msg.setEducation(value);
       break;
     case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addSocialMedia(value);
+      break;
+    case 11:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addBlockList(value);
+      break;
+    case 12:
       var value = /** @type {string} */ (reader.readString());
       msg.addNotInterested(value);
       break;
@@ -392,17 +404,31 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
       proto.UserInfo.serializeBinaryToWriter
     );
   }
+  f = message.getEducation();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
+  f = message.getSocialMediaList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      10,
+      f
+    );
+  }
   f = message.getBlockListList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      9,
+      11,
       f
     );
   }
   f = message.getNotInterestedList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      10,
+      12,
       f
     );
   }
@@ -592,11 +618,66 @@ proto.User.prototype.hasPreferences = function() {
 
 
 /**
- * repeated string block_list = 9;
+ * optional string education = 9;
+ * @return {string}
+ */
+proto.User.prototype.getEducation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setEducation = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * repeated string social_media = 10;
+ * @return {!Array<string>}
+ */
+proto.User.prototype.getSocialMediaList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 10));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setSocialMediaList = function(value) {
+  return jspb.Message.setField(this, 10, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.addSocialMedia = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 10, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearSocialMediaList = function() {
+  return this.setSocialMediaList([]);
+};
+
+
+/**
+ * repeated string block_list = 11;
  * @return {!Array<string>}
  */
 proto.User.prototype.getBlockListList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 11));
 };
 
 
@@ -605,7 +686,7 @@ proto.User.prototype.getBlockListList = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setBlockListList = function(value) {
-  return jspb.Message.setField(this, 9, value || []);
+  return jspb.Message.setField(this, 11, value || []);
 };
 
 
@@ -615,7 +696,7 @@ proto.User.prototype.setBlockListList = function(value) {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.addBlockList = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 11, value, opt_index);
 };
 
 
@@ -629,11 +710,11 @@ proto.User.prototype.clearBlockListList = function() {
 
 
 /**
- * repeated string not_interested = 10;
+ * repeated string not_interested = 12;
  * @return {!Array<string>}
  */
 proto.User.prototype.getNotInterestedList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 10));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 12));
 };
 
 
@@ -642,7 +723,7 @@ proto.User.prototype.getNotInterestedList = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setNotInterestedList = function(value) {
-  return jspb.Message.setField(this, 10, value || []);
+  return jspb.Message.setField(this, 12, value || []);
 };
 
 
@@ -652,7 +733,7 @@ proto.User.prototype.setNotInterestedList = function(value) {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.addNotInterested = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 10, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 12, value, opt_index);
 };
 
 
@@ -707,7 +788,10 @@ proto.UserInfo.toObject = function(includeInstance, msg) {
     interestsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     nativeLangsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
     otherLangsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    personalityType: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    personalityType: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    petInfo: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    drinkingInfo: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    smokingInfo: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -763,8 +847,20 @@ proto.UserInfo.deserializeBinaryFromReader = function(msg, reader) {
       }
       break;
     case 4:
-      var value = /** @type {!proto.PersonalityType} */ (reader.readEnum());
+      var value = /** @type {!proto.MbtiType} */ (reader.readEnum());
       msg.setPersonalityType(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.Pet} */ (reader.readEnum());
+      msg.setPetInfo(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.Frequency} */ (reader.readEnum());
+      msg.setDrinkingInfo(value);
+      break;
+    case 7:
+      var value = /** @type {!proto.Frequency} */ (reader.readEnum());
+      msg.setSmokingInfo(value);
       break;
     default:
       reader.skipField();
@@ -820,6 +916,27 @@ proto.UserInfo.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeEnum(
       4,
+      f
+    );
+  }
+  f = message.getPetInfo();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      5,
+      f
+    );
+  }
+  f = message.getDrinkingInfo();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      6,
+      f
+    );
+  }
+  f = message.getSmokingInfo();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      7,
       f
     );
   }
@@ -938,20 +1055,74 @@ proto.UserInfo.prototype.clearOtherLangsList = function() {
 
 
 /**
- * optional PersonalityType personality_type = 4;
- * @return {!proto.PersonalityType}
+ * optional MbtiType personality_type = 4;
+ * @return {!proto.MbtiType}
  */
 proto.UserInfo.prototype.getPersonalityType = function() {
-  return /** @type {!proto.PersonalityType} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.MbtiType} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {!proto.PersonalityType} value
+ * @param {!proto.MbtiType} value
  * @return {!proto.UserInfo} returns this
  */
 proto.UserInfo.prototype.setPersonalityType = function(value) {
   return jspb.Message.setProto3EnumField(this, 4, value);
+};
+
+
+/**
+ * optional Pet pet_info = 5;
+ * @return {!proto.Pet}
+ */
+proto.UserInfo.prototype.getPetInfo = function() {
+  return /** @type {!proto.Pet} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.Pet} value
+ * @return {!proto.UserInfo} returns this
+ */
+proto.UserInfo.prototype.setPetInfo = function(value) {
+  return jspb.Message.setProto3EnumField(this, 5, value);
+};
+
+
+/**
+ * optional Frequency drinking_info = 6;
+ * @return {!proto.Frequency}
+ */
+proto.UserInfo.prototype.getDrinkingInfo = function() {
+  return /** @type {!proto.Frequency} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.Frequency} value
+ * @return {!proto.UserInfo} returns this
+ */
+proto.UserInfo.prototype.setDrinkingInfo = function(value) {
+  return jspb.Message.setProto3EnumField(this, 6, value);
+};
+
+
+/**
+ * optional Frequency smoking_info = 7;
+ * @return {!proto.Frequency}
+ */
+proto.UserInfo.prototype.getSmokingInfo = function() {
+  return /** @type {!proto.Frequency} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {!proto.Frequency} value
+ * @return {!proto.UserInfo} returns this
+ */
+proto.UserInfo.prototype.setSmokingInfo = function(value) {
+  return jspb.Message.setProto3EnumField(this, 7, value);
 };
 
 
@@ -1336,6 +1507,13 @@ proto.LoginUserRequest.prototype.setPassword = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.UpdateUserRequest.repeatedFields_ = [4];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -1369,6 +1547,8 @@ proto.UpdateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     bio: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    education: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    socialMediaList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
     aboutUser: (f = msg.getAboutUser()) && proto.UserInfo.toObject(includeInstance, f),
     preferences: (f = msg.getPreferences()) && proto.UserInfo.toObject(includeInstance, f)
   };
@@ -1416,11 +1596,19 @@ proto.UpdateUserRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setBio(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEducation(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addSocialMedia(value);
+      break;
+    case 5:
       var value = new proto.UserInfo;
       reader.readMessage(value,proto.UserInfo.deserializeBinaryFromReader);
       msg.setAboutUser(value);
       break;
-    case 4:
+    case 6:
       var value = new proto.UserInfo;
       reader.readMessage(value,proto.UserInfo.deserializeBinaryFromReader);
       msg.setPreferences(value);
@@ -1461,17 +1649,31 @@ proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
-  if (f != null) {
+  f = message.getBio();
+  if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getEducation();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSocialMediaList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      4,
       f
     );
   }
   f = message.getAboutUser();
   if (f != null) {
     writer.writeMessage(
-      3,
+      5,
       f,
       proto.UserInfo.serializeBinaryToWriter
     );
@@ -1479,7 +1681,7 @@ proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer) {
   f = message.getPreferences();
   if (f != null) {
     writer.writeMessage(
-      4,
+      6,
       f,
       proto.UserInfo.serializeBinaryToWriter
     );
@@ -1519,35 +1721,72 @@ proto.UpdateUserRequest.prototype.getBio = function() {
  * @return {!proto.UpdateUserRequest} returns this
  */
 proto.UpdateUserRequest.prototype.setBio = function(value) {
-  return jspb.Message.setField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * Clears the field making it undefined.
+ * optional string education = 3;
+ * @return {string}
+ */
+proto.UpdateUserRequest.prototype.getEducation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
  * @return {!proto.UpdateUserRequest} returns this
  */
-proto.UpdateUserRequest.prototype.clearBio = function() {
-  return jspb.Message.setField(this, 2, undefined);
+proto.UpdateUserRequest.prototype.setEducation = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * Returns whether this field is set.
- * @return {boolean}
+ * repeated string social_media = 4;
+ * @return {!Array<string>}
  */
-proto.UpdateUserRequest.prototype.hasBio = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.UpdateUserRequest.prototype.getSocialMediaList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * optional UserInfo about_user = 3;
+ * @param {!Array<string>} value
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.setSocialMediaList = function(value) {
+  return jspb.Message.setField(this, 4, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.addSocialMedia = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.clearSocialMediaList = function() {
+  return this.setSocialMediaList([]);
+};
+
+
+/**
+ * optional UserInfo about_user = 5;
  * @return {?proto.UserInfo}
  */
 proto.UpdateUserRequest.prototype.getAboutUser = function() {
   return /** @type{?proto.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.UserInfo, 3));
+    jspb.Message.getWrapperField(this, proto.UserInfo, 5));
 };
 
 
@@ -1556,7 +1795,7 @@ proto.UpdateUserRequest.prototype.getAboutUser = function() {
  * @return {!proto.UpdateUserRequest} returns this
 */
 proto.UpdateUserRequest.prototype.setAboutUser = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
@@ -1574,17 +1813,17 @@ proto.UpdateUserRequest.prototype.clearAboutUser = function() {
  * @return {boolean}
  */
 proto.UpdateUserRequest.prototype.hasAboutUser = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional UserInfo preferences = 4;
+ * optional UserInfo preferences = 6;
  * @return {?proto.UserInfo}
  */
 proto.UpdateUserRequest.prototype.getPreferences = function() {
   return /** @type{?proto.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.UserInfo, 4));
+    jspb.Message.getWrapperField(this, proto.UserInfo, 6));
 };
 
 
@@ -1593,7 +1832,7 @@ proto.UpdateUserRequest.prototype.getPreferences = function() {
  * @return {!proto.UpdateUserRequest} returns this
 */
 proto.UpdateUserRequest.prototype.setPreferences = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 6, value);
 };
 
 
@@ -1611,7 +1850,7 @@ proto.UpdateUserRequest.prototype.clearPreferences = function() {
  * @return {boolean}
  */
 proto.UpdateUserRequest.prototype.hasPreferences = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -1879,60 +2118,163 @@ proto.FindChatMateRequest.prototype.setUserId = function(value) {
  * @enum {number}
  */
 proto.Interest = {
-  MUSIC: 0,
-  MOVIES: 1,
-  TV_SHOWS: 2,
-  BOOKS: 3,
-  HOBBIES: 4,
-  SPORTS: 5,
-  TRAVEL: 6,
-  FOOD_AND_DINING: 7,
-  FITNESS_AND_WELLNESS: 8,
-  GAMING: 9,
-  TECHNOLOGY: 10,
-  FASHION_AND_STYLE: 11,
-  ARTS_AND_CULTURE: 12,
-  PHOTOGRAPHY: 13,
-  NATURE_AND_OUTDOORS: 14,
-  POLITICS_AND_CURRENT_EVENTS: 15,
-  SCIENCE_AND_SPACE: 16,
-  PETS: 17,
-  VOLUNTEER_WORK: 18,
-  CREATIVE_WRITING: 19
+  HIKING: 0,
+  TRAVELING: 1,
+  COOKING: 2,
+  PHOTOGRAPHY: 3,
+  READING: 4,
+  YOGA: 5,
+  RUNNING: 6,
+  PAINTING: 7,
+  GAMING: 8,
+  WATCHING_MOVIES: 9,
+  PLAYING_MUSICAL_INSTRUMENTS: 10,
+  WRITING: 11,
+  VOLUNTEERING: 12,
+  SURFING: 13,
+  SKIING_SNOWBOARDING: 14,
+  DANCING: 15,
+  WINE_TASTING: 16,
+  CRAFTING: 17,
+  BIRD_WATCHING: 18,
+  SCUBA_DIVING: 19,
+  ROCK_CLIMBING: 20,
+  MEDITATION: 21,
+  FOOD_TASTING: 22,
+  BIKING: 23,
+  FASHION: 24,
+  GARDENING: 25,
+  CAMPING: 26,
+  PLAYING_SPORTS: 27,
+  LEARNING_NEW_LANGUAGES: 28,
+  DIY_PROJECTS: 29,
+  ASTRONOMY: 30,
+  BOARD_GAMES: 31,
+  KARAOKE: 32,
+  HORSEBACK_RIDING: 33,
+  FASHION_DESIGN: 34,
+  MOTORSPORTS: 35,
+  COLLECTING: 36,
+  STAND_UP_COMEDY: 37,
+  ANIME_MANGA: 38,
+  POTTERY: 39,
+  ACTING: 40,
+  FISHING: 41,
+  SUSTAINABLE_LIVING: 42,
+  GEOCACHING: 43,
+  MUSIC_FESTIVALS: 44,
+  HISTORY: 45,
+  BEER_BREWING: 46,
+  SALSA_DANCING: 47,
+  DIGITAL_ART_CREATION: 48,
+  UNKNOWN: 49
 };
 
 /**
  * @enum {number}
  */
 proto.Language = {
-  ENGLISH: 0,
-  CHINESE: 1,
-  SPANISH: 2,
+  MANDARIN_CHINESE: 0,
+  SPANISH: 1,
+  ENGLISH: 2,
   HINDI: 3,
-  ARABIC: 4,
-  FRENCH: 5,
-  BENGALI: 6,
-  RUSSIAN: 7,
-  PORTUGUESE: 8,
-  URDU: 9,
-  GERMAN: 10,
-  JAPANESE: 11,
-  SWAHILI: 12,
-  PUNJABI: 13,
-  KOREAN: 14,
-  TELUGU: 15,
-  MARATHI: 16,
+  BENGALI: 4,
+  PORTUGUESE: 5,
+  RUSSIAN: 6,
+  JAPANESE: 7,
+  LAHNDA: 8,
+  MARATHI: 9,
+  TELUGU: 10,
+  WU_CHINESE: 11,
+  TURKISH: 12,
+  KOREAN: 13,
+  FRENCH: 14,
+  GERMAN: 15,
+  VIETNAMESE: 16,
   TAMIL: 17,
-  ITALIAN: 18,
-  TURKISH: 19
+  URDU: 18,
+  YUE_CHINESE: 19,
+  JAVANESE: 20,
+  ITALIAN: 21,
+  EGYPTIAN_ARABIC: 22,
+  GUJARATI: 23,
+  JIN_CHINESE: 24,
+  POLISH: 25,
+  UKRAINIAN: 26,
+  MALAYALAM: 27,
+  KANNADA: 28,
+  XIANG_CHINESE: 29,
+  ORIYA: 30,
+  BURMESE: 31,
+  HAKKA_CHINESE: 32,
+  THAI: 33,
+  SUNDANESE: 34,
+  HAUSA: 35,
+  FARSI: 36,
+  DUTCH: 37,
+  YORUBA: 38,
+  SWAHILI: 39,
+  SERBO_CROATIAN: 40,
+  AMHARIC: 41,
+  NEPALI: 42,
+  HUNGARIAN: 43,
+  SIMPLIFIED_CHINESE: 44,
+  SOMALI: 45,
+  ASSAMESE: 46,
+  SINHALA: 47,
+  UZBEK: 48
 };
 
 /**
  * @enum {number}
  */
-proto.PersonalityType = {
-  INTROVERT: 0,
-  EXTRAVERT: 1
+proto.MbtiType = {
+  UNKNOWN_MBTI: 0,
+  ISTJ: 1,
+  ISFJ: 2,
+  INFJ: 3,
+  INTJ: 4,
+  ISTP: 5,
+  ISFP: 6,
+  INFP: 7,
+  INTP: 8,
+  ESTP: 9,
+  ESFP: 10,
+  ENFP: 11,
+  ENTP: 12,
+  ESTJ: 13,
+  ESFJ: 14,
+  ENFJ: 15,
+  ENTJ: 16
+};
+
+/**
+ * @enum {number}
+ */
+proto.Pet = {
+  UNKNOWN_PET: 0,
+  DOG: 1,
+  CAT: 2,
+  REPTILE: 3,
+  AMPHIBIAN: 4,
+  BIRD: 5,
+  HAMSTER: 6,
+  MULTIPLE_PETS: 7,
+  ALLERGIC: 8,
+  PET_FREE: 9,
+  OTHER: 10
+};
+
+/**
+ * @enum {number}
+ */
+proto.Frequency = {
+  UNKNOWN_FREQ: 0,
+  NEVER: 1,
+  RARELY: 2,
+  OCCASIONALLY: 3,
+  OFTEN: 4,
+  REGULARLY: 5
 };
 
 goog.object.extend(exports, proto);
