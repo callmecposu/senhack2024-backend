@@ -139,42 +139,46 @@ enum Language {
 }
 
 enum MbtiType {
-    ISTJ = 0;
-    ISFJ = 1;
-    INFJ = 2;
-    INTJ = 3;
-    ISTP = 4;
-    ISFP = 5;
-    INFP = 6;
-    INTP = 7;
-    ESTP = 8;
-    ESFP = 9;
-    ENFP = 10;
-    ENTP = 11;
-    ESTJ = 12;
-    ESFJ = 13;
-    ENFJ = 14;
-    ENTJ = 15;
+    UNKNOWN_MBTI = 0;
+    ISTJ = 1;
+    ISFJ = 2;
+    INFJ = 3;
+    INTJ = 4;
+    ISTP = 5;
+    ISFP = 6;
+    INFP = 7;
+    INTP = 8;
+    ESTP = 9;
+    ESFP = 10;
+    ENFP = 11;
+    ENTP = 12;
+    ESTJ = 13;
+    ESFJ = 14;
+    ENFJ = 15;
+    ENTJ = 16;
 }
 
 enum Pet {
-    DOG = 0;
-    CAT = 1;
-    REPTILE = 2;
-    AMPHIBIAN = 3;
-    BIRD = 4;
-    HAMSTER = 5;
-    MULTIPLE_PETS = 6;
-    ALLERGIC = 7;
-    PET_FREE = 8;
+    UNKNOWN_PET = 0;
+    DOG = 1;
+    CAT = 2;
+    REPTILE = 3;
+    AMPHIBIAN = 4;
+    BIRD = 5;
+    HAMSTER = 6;
+    MULTIPLE_PETS = 7;
+    ALLERGIC = 8;
+    PET_FREE = 9;
+    OTHER = 10;
 }
 
 enum Frequency {
-    NEVER = 0;
-    RARELY = 1;
-    OCCASIONALLY = 2;
-    OFTEN = 3;
-    REGULARLY = 4;
+    UNKNOWN_FREQ = 0;
+    NEVER = 1;
+    RARELY = 2;
+    OCCASIONALLY = 3;
+    OFTEN = 4;
+    REGULARLY = 5;
 }
 
 message CreateUserRequest {
@@ -191,9 +195,11 @@ message LoginUserRequest {
 
 message UpdateUserRequest {
     string id = 1;
-    optional string bio = 2;
-    optional UserInfo about_user = 3;
-    optional UserInfo preferences = 4;
+    string bio = 2;
+    string education = 3;
+    repeated string social_media = 4;
+    UserInfo about_user = 5;
+    UserInfo preferences = 6;
 }
 
 message GetUserRequest {

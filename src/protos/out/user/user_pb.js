@@ -128,7 +128,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.UpdateUserRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.UpdateUserRequest.repeatedFields_, null);
 };
 goog.inherits(proto.UpdateUserRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -1507,6 +1507,13 @@ proto.LoginUserRequest.prototype.setPassword = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.UpdateUserRequest.repeatedFields_ = [4];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -1540,6 +1547,8 @@ proto.UpdateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     bio: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    education: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    socialMediaList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
     aboutUser: (f = msg.getAboutUser()) && proto.UserInfo.toObject(includeInstance, f),
     preferences: (f = msg.getPreferences()) && proto.UserInfo.toObject(includeInstance, f)
   };
@@ -1587,11 +1596,19 @@ proto.UpdateUserRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setBio(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEducation(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addSocialMedia(value);
+      break;
+    case 5:
       var value = new proto.UserInfo;
       reader.readMessage(value,proto.UserInfo.deserializeBinaryFromReader);
       msg.setAboutUser(value);
       break;
-    case 4:
+    case 6:
       var value = new proto.UserInfo;
       reader.readMessage(value,proto.UserInfo.deserializeBinaryFromReader);
       msg.setPreferences(value);
@@ -1632,17 +1649,31 @@ proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
-  if (f != null) {
+  f = message.getBio();
+  if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getEducation();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSocialMediaList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      4,
       f
     );
   }
   f = message.getAboutUser();
   if (f != null) {
     writer.writeMessage(
-      3,
+      5,
       f,
       proto.UserInfo.serializeBinaryToWriter
     );
@@ -1650,7 +1681,7 @@ proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer) {
   f = message.getPreferences();
   if (f != null) {
     writer.writeMessage(
-      4,
+      6,
       f,
       proto.UserInfo.serializeBinaryToWriter
     );
@@ -1690,35 +1721,72 @@ proto.UpdateUserRequest.prototype.getBio = function() {
  * @return {!proto.UpdateUserRequest} returns this
  */
 proto.UpdateUserRequest.prototype.setBio = function(value) {
-  return jspb.Message.setField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * Clears the field making it undefined.
+ * optional string education = 3;
+ * @return {string}
+ */
+proto.UpdateUserRequest.prototype.getEducation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
  * @return {!proto.UpdateUserRequest} returns this
  */
-proto.UpdateUserRequest.prototype.clearBio = function() {
-  return jspb.Message.setField(this, 2, undefined);
+proto.UpdateUserRequest.prototype.setEducation = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * Returns whether this field is set.
- * @return {boolean}
+ * repeated string social_media = 4;
+ * @return {!Array<string>}
  */
-proto.UpdateUserRequest.prototype.hasBio = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.UpdateUserRequest.prototype.getSocialMediaList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * optional UserInfo about_user = 3;
+ * @param {!Array<string>} value
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.setSocialMediaList = function(value) {
+  return jspb.Message.setField(this, 4, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.addSocialMedia = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.UpdateUserRequest} returns this
+ */
+proto.UpdateUserRequest.prototype.clearSocialMediaList = function() {
+  return this.setSocialMediaList([]);
+};
+
+
+/**
+ * optional UserInfo about_user = 5;
  * @return {?proto.UserInfo}
  */
 proto.UpdateUserRequest.prototype.getAboutUser = function() {
   return /** @type{?proto.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.UserInfo, 3));
+    jspb.Message.getWrapperField(this, proto.UserInfo, 5));
 };
 
 
@@ -1727,7 +1795,7 @@ proto.UpdateUserRequest.prototype.getAboutUser = function() {
  * @return {!proto.UpdateUserRequest} returns this
 */
 proto.UpdateUserRequest.prototype.setAboutUser = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
@@ -1745,17 +1813,17 @@ proto.UpdateUserRequest.prototype.clearAboutUser = function() {
  * @return {boolean}
  */
 proto.UpdateUserRequest.prototype.hasAboutUser = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional UserInfo preferences = 4;
+ * optional UserInfo preferences = 6;
  * @return {?proto.UserInfo}
  */
 proto.UpdateUserRequest.prototype.getPreferences = function() {
   return /** @type{?proto.UserInfo} */ (
-    jspb.Message.getWrapperField(this, proto.UserInfo, 4));
+    jspb.Message.getWrapperField(this, proto.UserInfo, 6));
 };
 
 
@@ -1764,7 +1832,7 @@ proto.UpdateUserRequest.prototype.getPreferences = function() {
  * @return {!proto.UpdateUserRequest} returns this
 */
 proto.UpdateUserRequest.prototype.setPreferences = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 6, value);
 };
 
 
@@ -1782,7 +1850,7 @@ proto.UpdateUserRequest.prototype.clearPreferences = function() {
  * @return {boolean}
  */
 proto.UpdateUserRequest.prototype.hasPreferences = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -2161,48 +2229,52 @@ proto.Language = {
  * @enum {number}
  */
 proto.MbtiType = {
-  ISTJ: 0,
-  ISFJ: 1,
-  INFJ: 2,
-  INTJ: 3,
-  ISTP: 4,
-  ISFP: 5,
-  INFP: 6,
-  INTP: 7,
-  ESTP: 8,
-  ESFP: 9,
-  ENFP: 10,
-  ENTP: 11,
-  ESTJ: 12,
-  ESFJ: 13,
-  ENFJ: 14,
-  ENTJ: 15
+  UNKNOWN_MBTI: 0,
+  ISTJ: 1,
+  ISFJ: 2,
+  INFJ: 3,
+  INTJ: 4,
+  ISTP: 5,
+  ISFP: 6,
+  INFP: 7,
+  INTP: 8,
+  ESTP: 9,
+  ESFP: 10,
+  ENFP: 11,
+  ENTP: 12,
+  ESTJ: 13,
+  ESFJ: 14,
+  ENFJ: 15,
+  ENTJ: 16
 };
 
 /**
  * @enum {number}
  */
 proto.Pet = {
-  DOG: 0,
-  CAT: 1,
-  REPTILE: 2,
-  AMPHIBIAN: 3,
-  BIRD: 4,
-  HAMSTER: 5,
-  MULTIPLE_PETS: 6,
-  ALLERGIC: 7,
-  PET_FREE: 8
+  UNKNOWN_PET: 0,
+  DOG: 1,
+  CAT: 2,
+  REPTILE: 3,
+  AMPHIBIAN: 4,
+  BIRD: 5,
+  HAMSTER: 6,
+  MULTIPLE_PETS: 7,
+  ALLERGIC: 8,
+  PET_FREE: 9,
+  OTHER: 10
 };
 
 /**
  * @enum {number}
  */
 proto.Frequency = {
-  NEVER: 0,
-  RARELY: 1,
-  OCCASIONALLY: 2,
-  OFTEN: 3,
-  REGULARLY: 4
+  UNKNOWN_FREQ: 0,
+  NEVER: 1,
+  RARELY: 2,
+  OCCASIONALLY: 3,
+  OFTEN: 4,
+  REGULARLY: 5
 };
 
 goog.object.extend(exports, proto);

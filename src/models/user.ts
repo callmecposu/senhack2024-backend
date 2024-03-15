@@ -37,22 +37,22 @@ const userSchema: Schema = new Schema({
         interests: { type: [String], default: [] },
         nativeLanguages: { type: [String], default: [] },
         otherLanguages: { type: [String], default: [] },
-        personalityType: { type: String, default: '' },
-        petInfo: {type: String, default: ''},
-        drinkingInfo: {type: String, default: ''},
-        smokinfInfo: {type: String, default: ''}
+        personalityType: { type: String, default: '0' },
+        petInfo: {type: String, default: '0'},
+        drinkingInfo: {type: String, default: '0'},
+        smokingInfo: {type: String, default: '0'}
     },
     roomatePreferences: {
         interests: { type: [String], default: [] },
         nativeLanguages: { type: [String], default: [] },
         otherLanguages: { type: [String], default: [] },
-        personalityType: { type: String, default: '' },
-        petInfo: {type: String, default: ''},
-        drinkingInfo: {type: String, default: ''},
-        smokinfInfo: {type: String, default: ''}
+        personalityType: { type: String, default: '0' },
+        petInfo: {type: String, default: '0'},
+        drinkingInfo: {type: String, default: '0'},
+        smokingInfo: {type: String, default: '0'}
     },
     socialMedia: {type: [String], default: []},
-    eduaction: {type: String, default: ''},
+    education: {type: String, default: ''},
     blockList: { type: [String], default: [] },
     notInterested: { type: [String], default: [] },
     embeddings: { type: [Number], default: [] },

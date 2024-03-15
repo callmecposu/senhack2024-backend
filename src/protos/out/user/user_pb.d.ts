@@ -170,11 +170,14 @@ export namespace LoginUserRequest {
 export class UpdateUserRequest extends jspb.Message { 
     getId(): string;
     setId(value: string): UpdateUserRequest;
-
-    hasBio(): boolean;
-    clearBio(): void;
-    getBio(): string | undefined;
+    getBio(): string;
     setBio(value: string): UpdateUserRequest;
+    getEducation(): string;
+    setEducation(value: string): UpdateUserRequest;
+    clearSocialMediaList(): void;
+    getSocialMediaList(): Array<string>;
+    setSocialMediaList(value: Array<string>): UpdateUserRequest;
+    addSocialMedia(value: string, index?: number): string;
 
     hasAboutUser(): boolean;
     clearAboutUser(): void;
@@ -199,7 +202,9 @@ export class UpdateUserRequest extends jspb.Message {
 export namespace UpdateUserRequest {
     export type AsObject = {
         id: string,
-        bio?: string,
+        bio: string,
+        education: string,
+        socialMediaList: Array<string>,
         aboutUser?: UserInfo.AsObject,
         preferences?: UserInfo.AsObject,
     }
@@ -351,40 +356,44 @@ export enum Language {
 }
 
 export enum MbtiType {
-    ISTJ = 0,
-    ISFJ = 1,
-    INFJ = 2,
-    INTJ = 3,
-    ISTP = 4,
-    ISFP = 5,
-    INFP = 6,
-    INTP = 7,
-    ESTP = 8,
-    ESFP = 9,
-    ENFP = 10,
-    ENTP = 11,
-    ESTJ = 12,
-    ESFJ = 13,
-    ENFJ = 14,
-    ENTJ = 15,
+    UNKNOWN_MBTI = 0,
+    ISTJ = 1,
+    ISFJ = 2,
+    INFJ = 3,
+    INTJ = 4,
+    ISTP = 5,
+    ISFP = 6,
+    INFP = 7,
+    INTP = 8,
+    ESTP = 9,
+    ESFP = 10,
+    ENFP = 11,
+    ENTP = 12,
+    ESTJ = 13,
+    ESFJ = 14,
+    ENFJ = 15,
+    ENTJ = 16,
 }
 
 export enum Pet {
-    DOG = 0,
-    CAT = 1,
-    REPTILE = 2,
-    AMPHIBIAN = 3,
-    BIRD = 4,
-    HAMSTER = 5,
-    MULTIPLE_PETS = 6,
-    ALLERGIC = 7,
-    PET_FREE = 8,
+    UNKNOWN_PET = 0,
+    DOG = 1,
+    CAT = 2,
+    REPTILE = 3,
+    AMPHIBIAN = 4,
+    BIRD = 5,
+    HAMSTER = 6,
+    MULTIPLE_PETS = 7,
+    ALLERGIC = 8,
+    PET_FREE = 9,
+    OTHER = 10,
 }
 
 export enum Frequency {
-    NEVER = 0,
-    RARELY = 1,
-    OCCASIONALLY = 2,
-    OFTEN = 3,
-    REGULARLY = 4,
+    UNKNOWN_FREQ = 0,
+    NEVER = 1,
+    RARELY = 2,
+    OCCASIONALLY = 3,
+    OFTEN = 4,
+    REGULARLY = 5,
 }
