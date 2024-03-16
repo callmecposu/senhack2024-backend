@@ -17,15 +17,15 @@ const verboseLog = (message: string) => {
 };
 
 const calculateMBTICompatibility = (mbti1: string, mbti2: string): number => {
-    return (MBTICompatibility[mbti1][mbti2] || 0) * 40;
+    return (MBTICompatibility?.[mbti1]?.[mbti2] || 0) * 40;
 }
 
 const calculateSmokingDrinkingCompatibility = (smoking1: number, drinking1: number, smoking2: number, drinking2: number): number => {
-    return (compatibilityScore[smoking1][smoking2] || 0) + compatibilityScore[drinking1][drinking2];
+    return (compatibilityScore?.[smoking1]?.[smoking2] || 0) + compatibilityScore[drinking1][drinking2];
 }
 
 const calculatePetCompitability = (pet1: number, pet2: number): number => {
-    return (petCompitabilityScore[pet1][pet2] || 0);
+    return (petCompitabilityScore?.[pet1]?.[pet2] || 0);
 }
 
 function calculateProbabilities(usersWithScores: any[]): any[] {
